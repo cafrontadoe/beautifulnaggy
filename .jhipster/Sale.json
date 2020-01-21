@@ -1,0 +1,69 @@
+{
+    "name": "Sale",
+    "fields": [
+        {
+            "fieldName": "creationDate",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "total",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "managementDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "totalCost",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "iva",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "discount",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "productSale",
+            "otherEntityName": "productSale",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "sale"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "userClient",
+            "otherEntityName": "userClient",
+            "otherEntityRelationshipName": "sale"
+        }
+    ],
+    "changelogDate": "20200121204056",
+    "entityTableName": "sale",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

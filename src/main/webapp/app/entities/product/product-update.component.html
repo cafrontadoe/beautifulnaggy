@@ -1,0 +1,102 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-product-heading">Create or edit a Product</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!product.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="product.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_image">Image</label>
+                    <div>
+                        <div *ngIf="product.image" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(product.imageContentType, product.image)">open</a><br>
+                            <span class="pull-left">{{product.imageContentType}}, {{byteSize(product.image)}}</span>
+                            <button type="button" (click)="product.image=null;product.imageContentType=null;"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_image" (change)="setFileData($event, product, 'image', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="image" id="field_image"
+                        [(ngModel)]="product.image" />
+                    <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                        [(ngModel)]="product.imageContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="field_nombre"
+                        [(ngModel)]="product.nombre" required/>
+                    <div [hidden]="!(editForm.controls.nombre?.dirty && editForm.controls.nombre?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nombre?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="product.description" required/>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.description?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_codigo">Codigo</label>
+                    <input type="text" class="form-control" name="codigo" id="field_codigo"
+                        [(ngModel)]="product.codigo" required/>
+                    <div [hidden]="!(editForm.controls.codigo?.dirty && editForm.controls.codigo?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.codigo?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_available">Available</label>
+                    <input type="number" class="form-control" name="available" id="field_available"
+                        [(ngModel)]="product.available" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_priceBeauty">Price Beauty</label>
+                    <input type="number" class="form-control" name="priceBeauty" id="field_priceBeauty"
+                        [(ngModel)]="product.priceBeauty" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_priceClient">Price Client</label>
+                    <input type="number" class="form-control" name="priceClient" id="field_priceClient"
+                        [(ngModel)]="product.priceClient" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_packaging">Packaging</label>
+                    <input type="text" class="form-control" name="packaging" id="field_packaging"
+                        [(ngModel)]="product.packaging" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_productCaroucel">Product Caroucel</label>
+                    <select class="form-control" id="field_productCaroucel" name="productCaroucel" [(ngModel)]="product.productCaroucel" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="productCarouselOption.id === product.productCaroucel?.id ? product.productCaroucel : productCarouselOption" *ngFor="let productCarouselOption of productcarousels; trackBy: trackProductCarouselById">{{productCarouselOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

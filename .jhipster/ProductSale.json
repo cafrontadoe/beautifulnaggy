@@ -1,0 +1,43 @@
+{
+    "name": "ProductSale",
+    "fields": [
+        {
+            "fieldName": "countProduct",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "totalProduct",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "product",
+            "otherEntityName": "product",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "productSale"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "sale",
+            "otherEntityName": "sale",
+            "otherEntityRelationshipName": "productSale"
+        }
+    ],
+    "changelogDate": "20200121204057",
+    "entityTableName": "product_sale",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

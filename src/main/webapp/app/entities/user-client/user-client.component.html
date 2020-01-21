@@ -1,0 +1,76 @@
+<div>
+    <h2 id="page-heading">
+        <span>User Clients</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-user-client" [routerLink]="['/user-client/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new User Client
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="userClients">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Name</span></th>
+            <th><span>Last Name</span></th>
+            <th><span>Email</span></th>
+            <th><span>Document Number</span></th>
+            <th><span>Celphone</span></th>
+            <th><span>Address</span></th>
+            <th><span>Type Doc</span></th>
+            <th><span>Sale</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let userClient of userClients ;trackBy: trackId">
+                <td><a [routerLink]="['/user-client', userClient.id, 'view' ]">{{userClient.id}}</a></td>
+                <td>{{userClient.name}}</td>
+                <td>{{userClient.lastName}}</td>
+                <td>{{userClient.email}}</td>
+                <td>{{userClient.documentNumber}}</td>
+                <td>{{userClient.celphone}}</td>
+                <td>{{userClient.address}}</td>
+                <td>
+                    <div *ngIf="userClient.typeDoc">
+                        <a [routerLink]="['../type-doc', userClient.typeDoc?.id, 'view' ]" >{{userClient.typeDoc?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="userClient.sale">
+                        <a [routerLink]="['../sale', userClient.sale?.id, 'view' ]" >{{userClient.sale?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/user-client', userClient.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/user-client', userClient.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', 'user-client', { outlets: { popup: userClient.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+{
+    "name": "TypeDoc",
+    "fields": [
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "userClient",
+            "otherEntityName": "userClient",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "typeDoc"
+        }
+    ],
+    "changelogDate": "20200121204052",
+    "entityTableName": "type_doc",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

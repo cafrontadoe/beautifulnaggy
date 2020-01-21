@@ -1,0 +1,30 @@
+{
+    "name": "ProductCarousel",
+    "fields": [
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "product",
+            "otherEntityName": "product",
+            "otherEntityRelationshipName": "productCaroucel"
+        }
+    ],
+    "changelogDate": "20200121204055",
+    "entityTableName": "product_carousel",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

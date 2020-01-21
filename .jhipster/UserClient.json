@@ -1,0 +1,67 @@
+{
+    "name": "UserClient",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "documentNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "celphone",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "typeDoc",
+            "otherEntityName": "typeDoc",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "userClient"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "sale",
+            "otherEntityName": "sale",
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "userClient"
+        }
+    ],
+    "changelogDate": "20200121204054",
+    "entityTableName": "user_client",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

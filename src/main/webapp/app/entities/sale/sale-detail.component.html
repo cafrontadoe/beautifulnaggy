@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="sale">
+            <h2><span>Sale</span> {{sale.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Creation Date</span></dt>
+                <dd>
+                    <span>{{sale.creationDate}}</span>
+                </dd>
+                <dt><span>Total</span></dt>
+                <dd>
+                    <span>{{sale.total}}</span>
+                </dd>
+                <dt><span>Description</span></dt>
+                <dd>
+                    <span>{{sale.description}}</span>
+                </dd>
+                <dt><span>Management Date</span></dt>
+                <dd>
+                    <span>{{sale.managementDate}}</span>
+                </dd>
+                <dt><span>Total Cost</span></dt>
+                <dd>
+                    <span>{{sale.totalCost}}</span>
+                </dd>
+                <dt><span>Iva</span></dt>
+                <dd>
+                    <span>{{sale.iva}}</span>
+                </dd>
+                <dt><span>Discount</span></dt>
+                <dd>
+                    <span>{{sale.discount}}</span>
+                </dd>
+                <dt><span>Product Sale</span></dt>
+                <dd>
+                    <div *ngIf="sale.productSale">
+                        <a [routerLink]="['/product-sale', sale.productSale?.id, 'view']">{{sale.productSale?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/sale', sale.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
