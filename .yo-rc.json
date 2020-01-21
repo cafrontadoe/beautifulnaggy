@@ -1,0 +1,35 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "com.eit.beautifulnaggy"
+        },
+        "jhipsterVersion": "5.8.1",
+        "applicationType": "monolith",
+        "baseName": "beautifulNaggy",
+        "packageName": "com.eit.beautifulnaggy",
+        "packageFolder": "com/eit/beautifulnaggy",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "ehcache",
+        "enableHibernateCache": false,
+        "websocket": false,
+        "databaseType": "sql",
+        "devDatabaseType": "mysql",
+        "prodDatabaseType": "mysql",
+        "searchEngine": false,
+        "messageBroker": false,
+        "serviceDiscoveryType": false,
+        "buildTool": "gradle",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "OTRhMGVjNmQzMGYwZmYzYTAxZGRkZjU2ZjFiZDFiYmUxMDBlYTZiZmU4YTMzMmQzNDg0MDNhN2M3YmU3MDA4ZDZkOWYzOWVhNjYzNzgwMzk4NTZkNmQ3OTM4NGE5NGFmNTU2MjMyNjM4M2IzODIwYTJiMDg2N2U0MDMxZmQ3MWM=",
+        "clientFramework": "angularX",
+        "useSass": true,
+        "clientPackageManager": "npm",
+        "testFrameworks": [],
+        "jhiPrefix": "jhi",
+        "entitySuffix": "",
+        "dtoSuffix": "DTO",
+        "otherModules": [],
+        "enableTranslation": false
+    }
+}

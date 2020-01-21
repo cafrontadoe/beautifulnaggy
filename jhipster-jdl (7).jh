@@ -1,0 +1,54 @@
+entity TypeDoc {
+	description String required
+}
+
+entity Product {
+	image Blob
+    nombre String required,
+	description String required,
+    codigo String required,
+    available Integer,
+    priceBeauty Double,
+    priceClient Double,
+    packaging String
+}
+
+entity UserClient {
+	name String required,
+	lastName String,
+	email String required,
+    documentNumber String,
+    celphone String required
+    address String required
+}
+
+entity ProductCarousel {
+     image Blob required,
+}
+
+entity Sale {
+	creationDate Instant required,
+    total String required,
+    description String,
+    managementDate Instant,
+    totalCost Double required,
+    iva Double required,
+    discount Double
+}
+
+entity ProductSale {
+    countProduct Integer required, 
+    totalProduct Double required
+}
+
+
+relationship OneToOne {
+	UserClient{typeDoc} to TypeDoc{userClient},
+}
+
+relationship ManyToOne {
+	Product{productCaroucel} to ProductCarousel{product},
+	ProductSale{product} to Product{productSale},
+    Sale{productSale} to ProductSale{sale}
+    UserClient{sale} to Sale{userClient}
+}
