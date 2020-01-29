@@ -20,6 +20,7 @@ import { BeautifulNaggyEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
+import { CartService } from './home/cart.service';
 
 @NgModule({
     imports: [
@@ -59,7 +60,8 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
             provide: HTTP_INTERCEPTORS,
             useClass: NotificationInterceptor,
             multi: true
-        }
+        },
+        CartService
     ],
     bootstrap: [JhiMainComponent]
 })

@@ -1,10 +1,44 @@
-<div class="card-group">
-    <div class="card col-md-2" *ngFor="let product of products" >
-      <img class="card-img-top" [src]="product.imageToShow">
-      <div class="card-body">
-        <h5 class="card-title">{{product.description}}</h5>
-        <p class="card-text">{{product.packaging}}</p>
-        <p class="card-text"><small class="text-muted">$ {{product.priceBeauty}}</small></p>
-      </div>
+
+<form #singupForm="ngForm" #aForm>
+
+
+
+
+    <div class="container">
+
+        <div class="row product-list" style="margin: 1em 0;">
+           
+            <!-- START : Product Card -->
+            <div class="col-sm-12 col-md-6 col-lg-4 product-list__item"
+                *ngFor="let product of products; let i = index;">
+                <div class="card mb-4 shadow-sm pd-5">
+                    <div class="product-list__image">
+                        <img class="card-img-top" [src]="product.imageToShow" alt="Card image cap">
+                    </div>
+
+                    <div class="card-body">
+                        <p style="font-weight: bold;" class="cart-title">{{product.nombre}}</p>
+                        <p class="card-text">x|{{product.description}}</p>
+                        <p class="card-text"><small style="font-size: 14px;" class="text-muted">$
+                                {{product.priceBeauty}}</small></p>
+                        <p class="card-text" style="display: inline-block;">Disponibles: {{product.available}}</p>
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="button" (click)="addToCart(product)" *ngIf="product.isAdded"
+                                    class="btn btn-danger">Sacar del carrito</button>
+                                <button type="button" (click)="addToCart(product)"  *ngIf="!product.isAdded"
+                                    class="btn btn-success">Añadir al carrito</button>
+                            </span>
+                            <input class="form-control" name="countProduct" [(ngModel)]="product.requestCount"  style="display: inline-block; width: 60px;" min="0"
+                                type="number">
+                        </div>
+                        <div class="text-center">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END : Product Card -->
+
+        </div>
     </div>
-  </div>
+</form>

@@ -10,11 +10,5 @@ export interface IProductSale {
 }
 
 export class ProductSale implements IProductSale {
-    constructor(
-        public id?: number,
-        public countProduct?: number,
-        public totalProduct?: number,
-        public product?: IProduct,
-        public sales?: ISale[]
-    ) {}
+    constructor(public countProduct?: number, public totalProduct?: number, public product?: IProduct, public sales?: ISale[]) {}
 }

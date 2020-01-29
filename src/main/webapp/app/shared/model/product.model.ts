@@ -15,6 +15,8 @@ export interface IProduct {
     packaging?: string;
     productCaroucel?: IProductCarousel;
     productSales?: IProductSale[];
+    isAdded?: Boolean;
+    requestCount?: number;
 }
 
 export class Product implements IProduct {
@@ -31,6 +33,8 @@ export class Product implements IProduct {
         public priceClient?: number,
         public packaging?: string,
         public productCaroucel?: IProductCarousel,
-        public productSales?: IProductSale[]
+        public productSales?: IProductSale[],
+        public isAdded?: Boolean,
+        public requestCount?: number
     ) {}
 }

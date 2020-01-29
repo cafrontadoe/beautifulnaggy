@@ -3,13 +3,14 @@ import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgbDateMomentAdapter } from './util/datepicker-adapter';
 import { BeautifulNaggySharedLibsModule, BeautifulNaggySharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective } from './';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
     imports: [BeautifulNaggySharedLibsModule, BeautifulNaggySharedCommonModule],
-    declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective],
+    declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective, CartComponent],
     providers: [{ provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
     entryComponents: [JhiLoginModalComponent],
-    exports: [BeautifulNaggySharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective],
+    exports: [BeautifulNaggySharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective, CartComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class BeautifulNaggySharedModule {

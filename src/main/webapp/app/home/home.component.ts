@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
@@ -6,8 +6,10 @@ import { LoginModalService, AccountService, Account } from 'app/core';
 import { ProductService } from 'app/entities/product/product.service';
 import { filter, map } from 'rxjs/operators';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { IProduct } from 'app/shared/model/product.model';
+import { IProduct, Product } from 'app/shared/model/product.model';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ProductSale } from 'app/shared/model/product-sale.model';
+import { CartService } from './cart.service';
 
 @Component({
     selector: 'jhi-home',
@@ -19,13 +21,18 @@ export class HomeComponent implements OnInit {
     modalRef: NgbModalRef;
     products: IProduct[];
 
+    productSaleList: ProductSale[] = [];
+
+    @Output() emitter = new EventEmitter<ProductSale[]>();
+
     constructor(
         private accountService: AccountService,
         private loginModalService: LoginModalService,
         private eventManager: JhiEventManager,
         private readonly productService: ProductService,
         private readonly sanitizer: DomSanitizer,
-        protected jhiAlertService: JhiAlertService
+        protected jhiAlertService: JhiAlertService,
+        private cartService: CartService
     ) {}
 
     ngOnInit() {
@@ -80,5 +87,33 @@ export class HomeComponent implements OnInit {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    addToCart(productLocal: IProduct) {
+        if (productLocal.requestCount > productLocal.available) {
+            alert('la cantidad requerida es mayor a la disponible del producto ' + productLocal.nombre);
+        } else {
+            if (!productLocal.isAdded) {
+                productLocal.isAdded = true;
+                this.addProductSale(productLocal);
+            } else {
+                productLocal.isAdded = false;
+            }
+        }
+    }
+
+    private addProductSale(productLocal: any) {
+        this.productSaleList.push({
+            countProduct: productLocal.requestCount,
+            totalProduct: productLocal.requestCount * productLocal.priceBeauty,
+            product: productLocal
+        });
+        console.log('llega antes de emitter');
+        this.cartService.addToCart(this.productSaleList);
+        this.emitMessage();
+    }
+
+    private emitMessage() {
+        this.emitter.emit(this.productSaleList);
     }
 }
