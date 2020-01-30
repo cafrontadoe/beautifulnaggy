@@ -3,7 +3,7 @@ import { ProductSale } from 'app/shared/model/product-sale.model';
 import { CartService } from 'app/home/cart.service';
 
 @Component({
-    selector: 'app-cart',
+    selector: 'jhi-app-cart',
     templateUrl: './cart.component.html',
     styleUrls: ['./cart.component.scss']
 })
@@ -13,22 +13,18 @@ export class CartComponent implements OnInit, OnChanges {
 
     totalProducts: number;
 
-    constructor(private readonly cartService: CartService) {}
+    constructor() // private readonly cartService: CartService
+    {}
 
     ngOnInit() {
         console.log('entra a oninit de cart');
-        this.cartService.change.subscribe(productSaleList => {
+        /*  this.cartService.change.subscribe(productSaleList => {
             this.productSaleList = productSaleList;
             this.onEventSale();
-        });
+        }); */
     }
 
-    ngOnChanges() {
-        this.cartService.change.subscribe(productSaleList => {
-            this.productSaleList = productSaleList;
-            this.onEventSale();
-        });
-    }
+    ngOnChanges() {}
 
     onEventSale() {
         this.totalProducts = 0;

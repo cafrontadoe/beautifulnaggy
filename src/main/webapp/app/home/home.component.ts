@@ -23,8 +23,6 @@ export class HomeComponent implements OnInit {
 
     productSaleList: ProductSale[] = [];
 
-    @Output() emitter = new EventEmitter<ProductSale[]>();
-
     constructor(
         private accountService: AccountService,
         private loginModalService: LoginModalService,
@@ -89,15 +87,25 @@ export class HomeComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    addToCart(productLocal: IProduct) {
+    managementToCart(event: any, productLocal: IProduct) {
         if (productLocal.requestCount > productLocal.available) {
             alert('la cantidad requerida es mayor a la disponible del producto ' + productLocal.nombre);
         } else {
             if (!productLocal.isAdded) {
-                productLocal.isAdded = true;
                 this.addProductSale(productLocal);
+                productLocal.isAdded = true;
             } else {
+                this.dismissProduct(productLocal);
                 productLocal.isAdded = false;
+            }
+        }
+    }
+
+    dismissProduct(product: IProduct) {
+        for (let i = 0; i < this.productSaleList.length; i++) {
+            if (product.codigo === this.productSaleList[i].product.codigo) {
+                this.productSaleList.splice(i, 1);
+                this.cartService.changeSaleCart(this.productSaleList);
             }
         }
     }
@@ -108,12 +116,6 @@ export class HomeComponent implements OnInit {
             totalProduct: productLocal.requestCount * productLocal.priceBeauty,
             product: productLocal
         });
-        console.log('llega antes de emitter');
-        this.cartService.addToCart(this.productSaleList);
-        this.emitMessage();
-    }
-
-    private emitMessage() {
-        this.emitter.emit(this.productSaleList);
+        this.cartService.changeSaleCart(this.productSaleList);
     }
 }

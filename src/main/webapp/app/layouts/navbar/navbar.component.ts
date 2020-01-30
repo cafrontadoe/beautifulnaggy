@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 import { VERSION } from 'app/app.constants';
 import { AccountService, LoginModalService, LoginService } from 'app/core';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { CartService } from 'app/home/cart.service';
+import { ProductSale } from 'app/shared/model/product-sale.model';
 
 @Component({
     selector: 'jhi-navbar',
@@ -12,6 +14,8 @@ import { ProfileService } from 'app/layouts/profiles/profile.service';
     styleUrls: ['navbar.scss']
 })
 export class NavbarComponent implements OnInit {
+    // @HostBinding('class.is-open')
+    productSaleList: ProductSale[];
     inProduction: boolean;
     isNavbarCollapsed: boolean;
     languages: any[];
@@ -25,16 +29,26 @@ export class NavbarComponent implements OnInit {
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
         private router: Router
-    ) {
+    ) //      private cartService: CartService
+    {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
     }
 
     ngOnInit() {
+        console.log('entra a oninit de cart');
         this.profileService.getProfileInfo().then(profileInfo => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
+        this.cartService.change.subscribe(productSaleList => {
+            this.productSaleList = productSaleList;
+        });
+    }
+
+    activateSaleService() {
+        // this.cartService.changeSaleCart(this.productSaleList);
+        this.collapseNavbar();
     }
 
     collapseNavbar() {
