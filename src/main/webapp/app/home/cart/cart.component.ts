@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, HostBinding, OnChanges } from '@angular/core';
 import { CartService } from '../cart.service';
 import { ProductSale } from 'app/shared/model/product-sale.model';
+import { IProduct } from 'app/shared/model/product.model';
 
 const OFFSET_HEIGHT = 170;
 const PRODUCT_HEIGHT = 48;
@@ -13,9 +14,10 @@ const PRODUCT_HEIGHT = 48;
 export class CartComponent implements OnInit, OnChanges {
     @HostBinding('class.is-open')
     productSaleList: ProductSale[];
+    numProducts = 0;
+    totalCost = 0;
 
     products: any[] = [];
-    numProducts = 0;
     animatePlop = false;
     animatePopout = false;
     expanded = false;
@@ -38,12 +40,12 @@ export class CartComponent implements OnInit, OnChanges {
             this.onEventSale();
 
             // Make a plop animation
-            if (this.numProducts > 1) {
+            if (this.numProducts > 0) {
                 this.animatePlop = true;
                 /*   setTimeout(() => {
-          this.animatePlop = false;
-        }, 160); */
-            } else if (this.numProducts === 1) {
+  this.animatePlop = false;
+}, 160); */
+            } else if (this.numProducts === 0) {
                 this.animatePopout = true;
                 setTimeout(() => {
                     this.animatePopout = false;
@@ -62,12 +64,9 @@ export class CartComponent implements OnInit, OnChanges {
         this.numProducts = 0;
         this.productSaleList.forEach(element => {
             this.numProducts = this.numProducts + element.countProduct;
+            this.totalCost = (this.totalCost + element.product.priceBeauty) * element.countProduct;
         });
         console.log(this.numProducts);
-    }
-
-    deleteProduct(product) {
-        //this.cartService.deleteProductFromCart(product);
     }
 
     onCartClick() {

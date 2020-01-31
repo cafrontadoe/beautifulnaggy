@@ -92,6 +92,9 @@ export class HomeComponent implements OnInit {
             alert('la cantidad requerida es mayor a la disponible del producto ' + productLocal.nombre);
         } else {
             if (!productLocal.isAdded) {
+                if (productLocal.requestCount === 0 || productLocal.requestCount === undefined) {
+                    productLocal.requestCount = 1;
+                }
                 this.addProductSale(productLocal);
                 productLocal.isAdded = true;
             } else {
