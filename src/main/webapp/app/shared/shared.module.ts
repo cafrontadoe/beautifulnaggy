@@ -4,6 +4,7 @@ import { NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateMomentAdapter } from './util/datepicker-adapter';
 import { BeautifulNaggySharedLibsModule, BeautifulNaggySharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective } from './';
 import { CartComponent } from './components/cart/cart.component';
+import { CartService } from 'app/home/cart.service';
 
 @NgModule({
     imports: [BeautifulNaggySharedLibsModule, BeautifulNaggySharedCommonModule],
