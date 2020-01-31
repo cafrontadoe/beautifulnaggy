@@ -28,9 +28,8 @@ export class NavbarComponent implements OnInit {
         private accountService: AccountService,
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
-        private router: Router
-    ) //      private cartService: CartService
-    {
+        private router: Router //      private cartService: CartService
+    ) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
     }
@@ -40,9 +39,6 @@ export class NavbarComponent implements OnInit {
         this.profileService.getProfileInfo().then(profileInfo => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
-        });
-        this.cartService.change.subscribe(productSaleList => {
-            this.productSaleList = productSaleList;
         });
     }
 
