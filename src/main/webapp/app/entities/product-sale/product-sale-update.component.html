@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-product-sale-heading">Create or edit a Product Sale</h2>
+            <h2 id="jhi-product-sale-heading">Crear o editar un Producto de venta</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!productSale.id">
@@ -10,7 +10,7 @@
                         [(ngModel)]="productSale.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_countProduct">Count Product</label>
+                    <label class="form-control-label" for="field_countProduct">Cuenta del producto</label>
                     <input type="number" class="form-control" name="countProduct" id="field_countProduct"
                         [(ngModel)]="productSale.countProduct" required/>
                     <div [hidden]="!(editForm.controls.countProduct?.dirty && editForm.controls.countProduct?.invalid)">

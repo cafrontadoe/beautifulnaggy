@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span>Sales</span>
+        <span>-Ventas</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-sale" [routerLink]="['/sale/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span >
-            Create new Sale
+            Crear nueva venta
             </span>
         </button>
     </h2>
@@ -15,14 +15,14 @@
             <thead>
             <tr>
             <th><span>ID</span></th>
-            <th><span>Creation Date</span></th>
+            <th><span>Fecha de creación</span></th>
             <th><span>Total</span></th>
-            <th><span>Description</span></th>
-            <th><span>Management Date</span></th>
-            <th><span>Total Cost</span></th>
+            <th><span>Descripción</span></th>
+            <th><span>Fecha de gestión</span></th>
+            <th><span>Costo Total </span></th>
             <th><span>Iva</span></th>
-            <th><span>Discount</span></th>
-            <th><span>Product Sale</span></th>
+            <th><span>Descuento</span></th>
+            <th><span>Producto de venta</span></th>
             <th></th>
             </tr>
             </thead>
@@ -47,13 +47,13 @@
                                 [routerLink]="['/sale', sale.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">View</span>
+                            <span class="d-none d-md-inline">Ver</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/sale', sale.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Edit</span>
+                            <span class="d-none d-md-inline">Editar</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', 'sale', { outlets: { popup: sale.id + '/delete'} }]"
@@ -61,7 +61,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Delete</span>
+                            <span class="d-none d-md-inline">Borrar</span>
                         </button>
                     </div>
                 </td>

@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span>Product Carousels</span>
+        <span>Carrusel de Productos </span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-product-carousel" [routerLink]="['/product-carousel/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span >
-            Create new Product Carousel
+            Crear nuevo Producto de carrusel
             </span>
         </button>
     </h2>
@@ -15,7 +15,7 @@
             <thead>
             <tr>
             <th><span>ID</span></th>
-            <th><span>Image</span></th>
+            <th><span>Imagen</span></th>
             <th></th>
             </tr>
             </thead>
@@ -23,7 +23,7 @@
             <tr *ngFor="let productCarousel of productCarousels ;trackBy: trackId">
                 <td><a [routerLink]="['/product-carousel', productCarousel.id, 'view' ]">{{productCarousel.id}}</a></td>
                 <td>
-                    <a *ngIf="productCarousel.image" (click)="openFile(productCarousel.imageContentType, productCarousel.image)">open</a>
+                    <a *ngIf="productCarousel.image" (click)="openFile(productCarousel.imageContentType, productCarousel.image)">Abrir</a>
                     <span *ngIf="productCarousel.image">{{productCarousel.imageContentType}}, {{byteSize(productCarousel.image)}}</span>
                 </td>
                 <td class="text-right">
@@ -32,13 +32,13 @@
                                 [routerLink]="['/product-carousel', productCarousel.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">View</span>
+                            <span class="d-none d-md-inline">Ver</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/product-carousel', productCarousel.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Edit</span>
+                            <span class="d-none d-md-inline">Editar</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', 'product-carousel', { outlets: { popup: productCarousel.id + '/delete'} }]"
@@ -46,7 +46,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Delete</span>
+                            <span class="d-none d-md-inline">Borrar</span>
                         </button>
                     </div>
                 </td>

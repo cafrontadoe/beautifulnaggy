@@ -15,7 +15,7 @@
                 <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
                     <span>
                         <fa-icon icon="home"></fa-icon>
-                        <span>Home</span>
+                        <span>Nuestros Productos</span>
                     </span>
                 </a>
             </li>
@@ -31,7 +31,7 @@
                     <span>
                         <fa-icon icon="th-list"></fa-icon>
                         <span>
-                            Entities
+                            Administrador
                         </span>
                     </span>
                 </a>
@@ -40,42 +40,42 @@
                         <a class="dropdown-item" routerLink="type-doc" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span>Type Doc</span>
+                            <span>Tipo de documento</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="product" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span>Product</span>
+                            <span>Producto</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="user-client" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span>User Client</span>
+                            <span>Usuario</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="product-carousel" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span>Product Carousel</span>
+                            <span>Carrusel de producto</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="sale" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span>Sale</span>
+                            <span>Venta</span>
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" routerLink="product-sale" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
-                            <span>Product Sale</span>
+                            <span>Producto de venta </span>
                         </a>
                     </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
@@ -150,7 +150,7 @@
                     <span *ngIf="!getImageUrl()">
                         <fa-icon icon="user"></fa-icon>
                         <span>
-                            Account
+                            Cuenta
                         </span>
                     </span>
                     <span *ngIf="getImageUrl()">
@@ -162,26 +162,26 @@
                         <a class="dropdown-item" routerLink="settings" routerLinkActive="active"
                             (click)="collapseNavbar()">
                             <fa-icon icon="wrench" fixedWidth="true"></fa-icon>
-                            <span>Settings</span>
+                            <span>Configuaricón</span>
                         </a>
                     </li>
                     <li *ngSwitchCase="true">
                         <a class="dropdown-item" routerLink="password" routerLinkActive="active"
                             (click)="collapseNavbar()">
                             <fa-icon icon="clock" fixedWidth="true"></fa-icon>
-                            <span>Password</span>
+                            <span>Contraseña</span>
                         </a>
                     </li>
                     <li *ngSwitchCase="true">
                         <a class="dropdown-item" (click)="logout()" id="logout">
                             <fa-icon icon="sign-out-alt" fixedWidth="true"></fa-icon>
-                            <span>Sign out</span>
+                            <span>Cerrar sesión</span>
                         </a>
                     </li>
                     <li *ngSwitchCase="false">
                         <a class="dropdown-item" (click)="login()" id="login">
                             <fa-icon icon="sign-in-alt" fixedWidth="true"></fa-icon>
-                            <span>Sign in</span>
+                            <span>Ingresar</span>
                         </a>
                     </li>
                     <li *ngSwitchCase="false">

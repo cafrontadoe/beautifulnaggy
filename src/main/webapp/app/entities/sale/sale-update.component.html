@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-sale-heading">Create or edit a Sale</h2>
+            <h2 id="jhi-sale-heading">Crear o editar una venta</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!sale.id">
@@ -10,7 +10,7 @@
                         [(ngModel)]="sale.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_creationDate">Creation Date</label>
+                    <label class="form-control-label" for="field_creationDate">Fecha de creación</label>
                     <div class="d-flex">
                         <input id="field_creationDate" type="datetime-local" class="form-control" name="creationDate" [(ngModel)]="creationDate" placeholder="YYYY-MM-DD HH:mm"
                         required/>
@@ -18,11 +18,11 @@
                     <div [hidden]="!(editForm.controls.creationDate?.dirty && editForm.controls.creationDate?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.creationDate?.errors?.required">
-                        This field is required.
+                        Este campo es requerido.
                         </small>
                         <small class="form-text text-danger"
                             [hidden]="!editForm.controls.creationDate?.errors?.ZonedDateTimelocal">
-                            This field should be a date and time.
+                            Este campo debe ser una fecha y hora.
                         </small>
                     </div>
                 </div>
@@ -33,34 +33,34 @@
                     <div [hidden]="!(editForm.controls.total?.dirty && editForm.controls.total?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.total?.errors?.required">
-                        This field is required.
+                        Este campo es requerido.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_description">Description</label>
+                    <label class="form-control-label" for="field_description">Descripción</label>
                     <input type="text" class="form-control" name="description" id="field_description"
                         [(ngModel)]="sale.description" />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_managementDate">Management Date</label>
+                    <label class="form-control-label" for="field_managementDate">Fecha de gestión</label>
                     <div class="d-flex">
                         <input id="field_managementDate" type="datetime-local" class="form-control" name="managementDate" [(ngModel)]="managementDate" placeholder="YYYY-MM-DD HH:mm"
                         />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_totalCost">Total Cost</label>
+                    <label class="form-control-label" for="field_totalCost">Costo Total</label>
                     <input type="number" class="form-control" name="totalCost" id="field_totalCost"
                         [(ngModel)]="sale.totalCost" required/>
                     <div [hidden]="!(editForm.controls.totalCost?.dirty && editForm.controls.totalCost?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.totalCost?.errors?.required">
-                        This field is required.
+                        Este campo es requerido.
                         </small>
                         <small class="form-text text-danger"
                             [hidden]="!editForm.controls.totalCost?.errors?.number">
-                            This field should be a number.
+                            Este campo debe ser un número.
                         </small>
                     </div>
                 </div>
@@ -71,22 +71,22 @@
                     <div [hidden]="!(editForm.controls.iva?.dirty && editForm.controls.iva?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.iva?.errors?.required">
-                        This field is required.
+                        Este campo es requerido.
                         </small>
                         <small class="form-text text-danger"
                             [hidden]="!editForm.controls.iva?.errors?.number">
-                            This field should be a number.
+                            Este campo debe ser un número.
                         </small>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="field_discount">Discount</label>
+                    <label class="form-control-label" for="field_discount">Descuento</label>
                     <input type="number" class="form-control" name="discount" id="field_discount"
                         [(ngModel)]="sale.discount" />
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_productSale">Product Sale</label>
+                    <label class="form-control-label" for="field_productSale">Producto de venta</label>
                     <select class="form-control" id="field_productSale" name="productSale" [(ngModel)]="sale.productSale" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="productSaleOption.id === sale.productSale?.id ? sale.productSale : productSaleOption" *ngFor="let productSaleOption of productsales; trackBy: trackProductSaleById">{{productSaleOption.id}}</option>
@@ -95,10 +95,10 @@
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancelar</span>
                 </button>
                 <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Guardar</span>
                 </button>
             </div>
         </form>

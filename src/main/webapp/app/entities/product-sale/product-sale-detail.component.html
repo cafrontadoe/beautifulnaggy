@@ -1,19 +1,19 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="productSale">
-            <h2><span>Product Sale</span> {{productSale.id}}</h2>
+            <h2><span>Productos de venta</span> {{productSale.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Count Product</span></dt>
+                <dt><span>Cuenta del producto</span></dt>
                 <dd>
                     <span>{{productSale.countProduct}}</span>
                 </dd>
-                <dt><span>Total Product</span></dt>
+                <dt><span>Producto total</span></dt>
                 <dd>
                     <span>{{productSale.totalProduct}}</span>
                 </dd>
-                <dt><span>Product</span></dt>
+                <dt><span>Producto</span></dt>
                 <dd>
                     <div *ngIf="productSale.product">
                         <a [routerLink]="['/product', productSale.product?.id, 'view']">{{productSale.product?.id}}</a>
@@ -24,13 +24,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span>Atras</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/product-sale', productSale.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Editar</span>
             </button>
         </div>
     </div>

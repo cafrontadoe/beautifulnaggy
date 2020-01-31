@@ -1,14 +1,14 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="product">
-            <h2><span>Product</span> {{product.id}}</h2>
+            <h2><span>Producto</span> {{product.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Image</span></dt>
+                <dt><span>Imagen</span></dt>
                 <dd>
                     <div *ngIf="product.image">
-                        <a (click)="openFile(product.imageContentType, product.image)">open</a>
+                        <a (click)="openFile(product.imageContentType, product.image)">Abrir</a>
                         {{product.imageContentType}}, {{byteSize(product.image)}}
                     </div>
                 </dd>
@@ -16,7 +16,7 @@
                 <dd>
                     <span>{{product.nombre}}</span>
                 </dd>
-                <dt><span>Description</span></dt>
+                <dt><span>Descripción</span></dt>
                 <dd>
                     <span>{{product.description}}</span>
                 </dd>
@@ -24,15 +24,15 @@
                 <dd>
                     <span>{{product.codigo}}</span>
                 </dd>
-                <dt><span>Available</span></dt>
+                <dt><span>Disponible</span></dt>
                 <dd>
                     <span>{{product.available}}</span>
                 </dd>
-                <dt><span>Price Beauty</span></dt>
+                <dt><span>Precio belleza</span></dt>
                 <dd>
                     <span>{{product.priceBeauty}}</span>
                 </dd>
-                <dt><span>Price Client</span></dt>
+                <dt><span>Precio Cliente</span></dt>
                 <dd>
                     <span>{{product.priceClient}}</span>
                 </dd>
@@ -40,7 +40,7 @@
                 <dd>
                     <span>{{product.packaging}}</span>
                 </dd>
-                <dt><span>Product Caroucel</span></dt>
+                <dt><span>carrusel de productos</span></dt>
                 <dd>
                     <div *ngIf="product.productCaroucel">
                         <a [routerLink]="['/product-carousel', product.productCaroucel?.id, 'view']">{{product.productCaroucel?.id}}</a>
@@ -51,13 +51,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span>Atras</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/product', product.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Editar</span>
             </button>
         </div>
     </div>

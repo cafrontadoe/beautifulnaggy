@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span>Type Docs</span>
+        <span>Tipo de documento</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-type-doc" [routerLink]="['/type-doc/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span >
-            Create new Type Doc
+            Crear nuevo tipo de documento 
             </span>
         </button>
     </h2>
@@ -15,7 +15,7 @@
             <thead>
             <tr>
             <th><span>ID</span></th>
-            <th><span>Description</span></th>
+            <th><span>Descripción</span></th>
             <th></th>
             </tr>
             </thead>
@@ -29,13 +29,13 @@
                                 [routerLink]="['/type-doc', typeDoc.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">View</span>
+                            <span class="d-none d-md-inline">Ver</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/type-doc', typeDoc.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Edit</span>
+                            <span class="d-none d-md-inline">Editar</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', 'type-doc', { outlets: { popup: typeDoc.id + '/delete'} }]"
@@ -43,7 +43,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Delete</span>
+                            <span class="d-none d-md-inline">Borrar</span>
                         </button>
                     </div>
                 </td>

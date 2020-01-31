@@ -1,41 +1,41 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="userClient">
-            <h2><span>User Client</span> {{userClient.id}}</h2>
+            <h2><span>Usuario</span> {{userClient.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Name</span></dt>
+                <dt><span>Nombre</span></dt>
                 <dd>
                     <span>{{userClient.name}}</span>
                 </dd>
-                <dt><span>Last Name</span></dt>
+                <dt><span>Apellido</span></dt>
                 <dd>
                     <span>{{userClient.lastName}}</span>
                 </dd>
-                <dt><span>Email</span></dt>
+                <dt><span>Correo</span></dt>
                 <dd>
                     <span>{{userClient.email}}</span>
                 </dd>
-                <dt><span>Document Number</span></dt>
+                <dt><span>Numero de documento</span></dt>
                 <dd>
                     <span>{{userClient.documentNumber}}</span>
                 </dd>
-                <dt><span>Celphone</span></dt>
+                <dt><span>Celular</span></dt>
                 <dd>
                     <span>{{userClient.celphone}}</span>
                 </dd>
-                <dt><span>Address</span></dt>
+                <dt><span>Dirección</span></dt>
                 <dd>
                     <span>{{userClient.address}}</span>
                 </dd>
-                <dt><span>Type Doc</span></dt>
+                <dt><span>Tipo de documento</span></dt>
                 <dd>
                     <div *ngIf="userClient.typeDoc">
                         <a [routerLink]="['/type-doc', userClient.typeDoc?.id, 'view']">{{userClient.typeDoc?.id}}</a>
                     </div>
                 </dd>
-                <dt><span>Sale</span></dt>
+                <dt><span>Venta</span></dt>
                 <dd>
                     <div *ngIf="userClient.sale">
                         <a [routerLink]="['/sale', userClient.sale?.id, 'view']">{{userClient.sale?.id}}</a>
@@ -46,13 +46,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Atras</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/user-client', userClient.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Editar</span>
             </button>
         </div>
     </div>

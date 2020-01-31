@@ -1,10 +1,10 @@
 <div>
     <h2 id="page-heading">
-        <span>Products</span>
+        <span>Productos</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-product" [routerLink]="['/product/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span >
-            Create new Product
+            Crear nuevo producto
             </span>
         </button>
     </h2>
@@ -15,15 +15,15 @@
             <thead>
             <tr>
             <th><span>ID</span></th>
-            <th><span>Image</span></th>
+            <th><span>Imagen</span></th>
             <th><span>Nombre</span></th>
-            <th><span>Description</span></th>
+            <th><span>Descripción</span></th>
             <th><span>Codigo</span></th>
-            <th><span>Available</span></th>
-            <th><span>Price Beauty</span></th>
-            <th><span>Price Client</span></th>
-            <th><span>Packaging</span></th>
-            <th><span>Product Caroucel</span></th>
+            <th><span>Disponible</span></th>
+            <th><span>Precio Belleza</span></th>
+            <th><span>Precio Cliente</span></th>
+            <th><span>Embalaje</span></th>
+            <th><span>Carrusel de producto </span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,7 +31,7 @@
             <tr *ngFor="let product of products ;trackBy: trackId">
                 <td><a [routerLink]="['/product', product.id, 'view' ]">{{product.id}}</a></td>
                 <td>
-                    <a *ngIf="product.image" (click)="openFile(product.imageContentType, product.image)">open</a>
+                    <a *ngIf="product.image" (click)="openFile(product.imageContentType, product.image)">Abrir</a>
                     <span *ngIf="product.image">{{product.imageContentType}}, {{byteSize(product.image)}}</span>
                 </td>
                 <td>{{product.nombre}}</td>
@@ -52,13 +52,13 @@
                                 [routerLink]="['/product', product.id, 'view' ]"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline">View</span>
+                            <span class="d-none d-md-inline">Ver</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/product', product.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline">Edit</span>
+                            <span class="d-none d-md-inline">Editar</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', 'product', { outlets: { popup: product.id + '/delete'} }]"
@@ -66,7 +66,7 @@
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
                             <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline">Delete</span>
+                            <span class="d-none d-md-inline">Borrar</span>
                         </button>
                     </div>
                 </td>
