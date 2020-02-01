@@ -1,26 +1,26 @@
 <div>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h1>Registration</h1>
+            <h1>Registro de Usuario</h1>
 
             <div class="alert alert-success" *ngIf="success">
-                <strong>Registration saved!</strong> Please check your email for confirmation.
+                <strong>Registro exitoso!</strong> por favor verifica tu correo.
             </div>
 
             <div class="alert alert-danger" *ngIf="error">
-                <strong>Registration failed!</strong> Please try again later.
+                <strong>Registro fallido!</strong> por favor intente de nuevo.
             </div>
 
             <div class="alert alert-danger" *ngIf="errorUserExists">
-                <strong>Login name already registered!</strong> Please choose another one.
+                <strong>el usuario ya se encuentra registrado en el sitio!</strong> por favor escoge otro.
             </div>
 
             <div class="alert alert-danger" *ngIf="errorEmailExists">
-                <strong>Email is already in use!</strong> Please choose another one.
+                <strong>El correo ya está registrado!</strong> por favor escoge otro.
             </div>
 
             <div class="alert alert-danger" *ngIf="doNotMatch">
-                The password and its confirmation do not match!
+                la contraseña y la confirmación de la contraseña no coinciden!
             </div>
         </div>
     </div>
@@ -28,7 +28,61 @@
         <div class="col-md-8">
             <form name="form" role="form" (ngSubmit)="register()" #registerForm="ngForm" *ngIf="!success">
                 <div class="form-group">
-                    <label class="form-control-label" for="login">Username</label>
+                    <label class="form-control-label" for="field_name">Nombres</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                        [(ngModel)]="userClient.name" required/>
+                    <div [hidden]="!(registerForm.controls.name?.dirty && registerForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!registerForm.controls.name?.errors?.required">
+                        los nombres es requerido
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_lastName">Apellidos</label>
+                    <input type="text" class="form-control" name="lastName" id="field_lastName"
+                        [(ngModel)]="userClient.lastName" />
+                </div>
+               
+                <div class="form-group">
+                    <label class="form-control-label" for="field_documentNumber">Número de Identificación</label>
+                    <input type="text" class="form-control" name="documentNumber" id="field_documentNumber"
+                        [(ngModel)]="userClient.documentNumber" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_celphone">Celular</label>
+                    <input type="text" class="form-control" name="celphone" id="field_celphone"
+                        [(ngModel)]="userClient.celphone" required/>
+                    <div [hidden]="!(registerForm.controls.celphone?.dirty && registerForm.controls.celphone?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!registerForm.controls.celphone?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_address">Direccion</label>
+                    <input type="text" class="form-control" name="address" id="field_address"
+                        [(ngModel)]="userClient.address" required/>
+                    <div [hidden]="!(registerForm.controls.address?.dirty && registerForm.controls.address?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!registerForm.controls.address?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_typeDoc">Tipo de Documento</label>
+                    <select class="form-control" id="field_typeDoc" name="typeDoc" [(ngModel)]="userClient.typeDoc">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="typeDocOption.id === userClient.typeDoc?.id ? userClient.typeDoc : typeDocOption" *ngFor="let typeDocOption of typedocs; trackBy: trackTypeDocById">{{typeDocOption.description}}</option>
+                    </select>
+                </div>
+              
+              
+                <div class="form-group">
+                    <label class="form-control-label" for="login">Correo</label>
                     <input type="text" class="form-control" [(ngModel)]="registerAccount.login" id="login" name="login" #login="ngModel" placeholder="Your username"
                             required minlength="1" maxlength="50" pattern="^[_.@A-Za-z0-9-]*$">
                     <div *ngIf="login.dirty && login.invalid">
@@ -49,31 +103,9 @@
                         </small>
                     </div>
                 </div>
+               
                 <div class="form-group">
-                    <label class="form-control-label" for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" #email="ngModel" placeholder="Your email"
-                            [(ngModel)]="registerAccount.email" minlength=5 maxlength=254 email required>
-                    <div *ngIf="email.dirty && email.invalid">
-                        <small class="form-text text-danger" *ngIf="email.errors.required"
-                               >
-                            Your email is required.
-                        </small>
-                        <small class="form-text text-danger" *ngIf="email.errors.invalid"
-                              >
-                            Your email is invalid.
-                        </small>
-                        <small class="form-text text-danger" *ngIf="email.errors.minlength"
-                              >
-                            Your email is required to be at least 5 characters.
-                        </small>
-                        <small class="form-text text-danger" *ngIf="email.errors.maxlength"
-                              >
-                            Your email cannot be longer than 100 characters.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="password">New password</label>
+                    <label class="form-control-label" for="password">Nueva Contraseña</label>
                     <input type="password" class="form-control" id="password" name="password" #password="ngModel" placeholder="New password"
                             [(ngModel)]="registerAccount.password" minlength=4 maxlength=50 required>
                     <div *ngIf="password.dirty && password.invalid">
@@ -93,7 +125,7 @@
                     <jhi-password-strength-bar [passwordToCheck]="registerAccount.password"></jhi-password-strength-bar>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="confirmPassword">New password confirmation</label>
+                    <label class="form-control-label" for="confirmPassword">Confirmación de Contraseña</label>
                     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" #confirmPasswordInput="ngModel" placeholder="Confirm the new password"
                             [(ngModel)]="confirmPassword" minlength=4 maxlength=50 required>
                     <div *ngIf="confirmPasswordInput.dirty && confirmPasswordInput.invalid">
@@ -112,13 +144,11 @@
                     </div>
                 </div>
 
-                <button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-primary">Register</button>
+                <button type="submit" [disabled]="registerForm.form.invalid" class="btn btn-primary">Registrar</button>
             </form>
-            <p></p>
-            <div class="alert alert-warning">
-                <span>If you want to </span>
-                <a class="alert-link" (click)="openLogin()">sign in</a><span>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").</span>
-            </div>
+            
         </div>
     </div>
 </div>
+
+<jhi-user-client-update></jhi-user-client-update>
