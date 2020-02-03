@@ -1,6 +1,6 @@
 <div class="preview" style="position: fixed; left: 100px; z-index: 100;"
-  *ngIf="productSaleList && productSaleList.length > 0" [class.expanded]='expanded'>
-  <button [class.not-shown]='!productSaleList.length > 0 || expanded' type="button" class="circle"
+  *ngIf="productSaleList && productSaleList.length" [class.expanded]='expanded'>
+  <button [class.not-shown]='!productSaleList.length  || expanded' type="button" class="circle"
     (click)="onCartClick()">
     <img src="../../assets/cart_white.svg" alt="cart" />
     <div class="indicator"><span>{{numProducts}}</span></div>
