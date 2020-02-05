@@ -8,8 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -35,10 +33,12 @@ public class ProductSale implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("productSales")
+    private Sale sale;
+
+    @OneToOne(mappedBy = "productSale")
+    @JsonIgnore
     private Product product;
 
-    @OneToMany(mappedBy = "productSale")
-    private Set<Sale> sales = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -74,6 +74,19 @@ public class ProductSale implements Serializable {
         this.totalProduct = totalProduct;
     }
 
+    public Sale getSale() {
+        return sale;
+    }
+
+    public ProductSale sale(Sale sale) {
+        this.sale = sale;
+        return this;
+    }
+
+    public void setSale(Sale sale) {
+        this.sale = sale;
+    }
+
     public Product getProduct() {
         return product;
     }
@@ -85,31 +98,6 @@ public class ProductSale implements Serializable {
 
     public void setProduct(Product product) {
         this.product = product;
-    }
-
-    public Set<Sale> getSales() {
-        return sales;
-    }
-
-    public ProductSale sales(Set<Sale> sales) {
-        this.sales = sales;
-        return this;
-    }
-
-    public ProductSale addSale(Sale sale) {
-        this.sales.add(sale);
-        sale.setProductSale(this);
-        return this;
-    }
-
-    public ProductSale removeSale(Sale sale) {
-        this.sales.remove(sale);
-        sale.setProductSale(null);
-        return this;
-    }
-
-    public void setSales(Set<Sale> sales) {
-        this.sales = sales;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

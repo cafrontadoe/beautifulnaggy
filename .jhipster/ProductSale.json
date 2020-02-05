@@ -19,15 +19,16 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "product",
-            "otherEntityName": "product",
+            "relationshipName": "sale",
+            "otherEntityName": "sale",
             "otherEntityField": "id",
             "otherEntityRelationshipName": "productSale"
         },
         {
-            "relationshipType": "one-to-many",
-            "relationshipName": "sale",
-            "otherEntityName": "sale",
+            "relationshipType": "one-to-one",
+            "relationshipName": "product",
+            "otherEntityName": "product",
+            "ownerSide": false,
             "otherEntityRelationshipName": "productSale"
         }
     ],

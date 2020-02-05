@@ -10,7 +10,7 @@ export interface IUserClient {
     celphone?: string;
     address?: string;
     typeDoc?: ITypeDoc;
-    sale?: ISale;
+    sales?: ISale[];
 }
 
 export class UserClient implements IUserClient {
@@ -23,6 +23,6 @@ export class UserClient implements IUserClient {
         public celphone?: string,
         public address?: string,
         public typeDoc?: ITypeDoc,
-        public sale?: ISale
+        public sales?: ISale[]
     ) {}
 }

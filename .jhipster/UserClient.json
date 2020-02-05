@@ -40,18 +40,16 @@
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-one",
+            "relationshipType": "many-to-one",
             "relationshipName": "typeDoc",
             "otherEntityName": "typeDoc",
             "otherEntityField": "id",
-            "ownerSide": true,
             "otherEntityRelationshipName": "userClient"
         },
         {
-            "relationshipType": "many-to-one",
+            "relationshipType": "one-to-many",
             "relationshipName": "sale",
             "otherEntityName": "sale",
-            "otherEntityField": "id",
             "otherEntityRelationshipName": "userClient"
         }
     ],

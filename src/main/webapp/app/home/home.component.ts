@@ -87,19 +87,23 @@ export class HomeComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    managementToCart(event: any, productLocal: IProduct) {
-        if (productLocal.requestCount > productLocal.available) {
-            alert('la cantidad requerida es mayor a la disponible del producto ' + productLocal.nombre);
+    managementToCart(productLocal: IProduct) {
+        if (!this.isAuthenticated()) {
+            this.login();
         } else {
-            if (!productLocal.isAdded) {
-                if (productLocal.requestCount === 0 || productLocal.requestCount === undefined) {
-                    productLocal.requestCount = 1;
-                }
-                this.addProductSale(productLocal);
-                productLocal.isAdded = true;
+            if (productLocal.requestCount > productLocal.available) {
+                alert('la cantidad requerida es mayor a la disponible del producto ' + productLocal.nombre);
             } else {
-                this.dismissProduct(productLocal);
-                productLocal.isAdded = false;
+                if (!productLocal.isAdded) {
+                    if (productLocal.requestCount === 0 || productLocal.requestCount === undefined) {
+                        productLocal.requestCount = 1;
+                    }
+                    this.addProductSale(productLocal);
+                    productLocal.isAdded = true;
+                } else {
+                    this.dismissProduct(productLocal);
+                    productLocal.isAdded = false;
+                }
             }
         }
     }

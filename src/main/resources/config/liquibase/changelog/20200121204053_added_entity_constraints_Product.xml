@@ -8,6 +8,12 @@
     -->
     <changeSet id="20200121204053-2" author="jhipster">
         
+        <addForeignKeyConstraint baseColumnNames="product_sale_id"
+                                 baseTableName="product"
+                                 constraintName="fk_product_product_sale_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product_sale"/>
+
         <addForeignKeyConstraint baseColumnNames="product_caroucel_id"
                                  baseTableName="product"
                                  constraintName="fk_product_product_caroucel_id"

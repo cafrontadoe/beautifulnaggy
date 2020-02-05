@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -26,10 +28,8 @@ public class TypeDoc implements Serializable {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @OneToOne(mappedBy = "typeDoc")
-    @JsonIgnore
-    private UserClient userClient;
-
+    @OneToMany(mappedBy = "typeDoc")
+    private Set<UserClient> userClients = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -52,17 +52,29 @@ public class TypeDoc implements Serializable {
         this.description = description;
     }
 
-    public UserClient getUserClient() {
-        return userClient;
+    public Set<UserClient> getUserClients() {
+        return userClients;
     }
 
-    public TypeDoc userClient(UserClient userClient) {
-        this.userClient = userClient;
+    public TypeDoc userClients(Set<UserClient> userClients) {
+        this.userClients = userClients;
         return this;
     }
 
-    public void setUserClient(UserClient userClient) {
-        this.userClient = userClient;
+    public TypeDoc addUserClient(UserClient userClient) {
+        this.userClients.add(userClient);
+        userClient.setTypeDoc(this);
+        return this;
+    }
+
+    public TypeDoc removeUserClient(UserClient userClient) {
+        this.userClients.remove(userClient);
+        userClient.setTypeDoc(null);
+        return this;
+    }
+
+    public void setUserClients(Set<UserClient> userClients) {
+        this.userClients = userClients;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -66,16 +66,9 @@
 
                 <div class="form-group">
                     <label class="form-control-label" for="field_typeDoc">Type Doc</label>
-                    <select class="form-control" id="field_typeDoc" name="typeDoc" [(ngModel)]="userClient.typeDoc">
+                    <select class="form-control" id="field_typeDoc" name="typeDoc" [(ngModel)]="userClient.typeDoc" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="typeDocOption.id === userClient.typeDoc?.id ? userClient.typeDoc : typeDocOption" *ngFor="let typeDocOption of typedocs; trackBy: trackTypeDocById">{{typeDocOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_sale">Sale</label>
-                    <select class="form-control" id="field_sale" name="sale" [(ngModel)]="userClient.sale" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="saleOption.id === userClient.sale?.id ? userClient.sale : saleOption" *ngFor="let saleOption of sales; trackBy: trackSaleById">{{saleOption.id}}</option>
                     </select>
                 </div>
             </div>

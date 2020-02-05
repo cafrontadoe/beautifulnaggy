@@ -15,8 +15,6 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing TypeDoc.
@@ -78,18 +76,10 @@ public class TypeDocResource {
     /**
      * GET  /type-docs : get all the typeDocs.
      *
-     * @param filter the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of typeDocs in body
      */
     @GetMapping("/type-docs")
-    public List<TypeDoc> getAllTypeDocs(@RequestParam(required = false) String filter) {
-        if ("userclient-is-null".equals(filter)) {
-            log.debug("REST request to get all TypeDocs where userClient is null");
-            return StreamSupport
-                .stream(typeDocRepository.findAll().spliterator(), false)
-                .filter(typeDoc -> typeDoc.getUserClient() == null)
-                .collect(Collectors.toList());
-        }
+    public List<TypeDoc> getAllTypeDocs() {
         log.debug("REST request to get all TypeDocs");
         return typeDocRepository.findAll();
     }

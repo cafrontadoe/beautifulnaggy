@@ -24,7 +24,6 @@ const ENTITY_STATES = [...userClientRoute, ...userClientPopupRoute];
         UserClientDeletePopupComponent
     ],
     entryComponents: [UserClientComponent, UserClientUpdateComponent, UserClientDeleteDialogComponent, UserClientDeletePopupComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    exports: [UserClientUpdateComponent]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class BeautifulNaggyUserClientModule {}

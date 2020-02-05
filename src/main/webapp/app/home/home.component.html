@@ -25,13 +25,13 @@
                                 <p class="card-text" style="display: inline-block;">Disponibles: {{product.available}}</p>
                                 <div class="input-group">
                                     <span class="input-group-btn">
-                                        <button type="button" (click)="managementToCart($event, product)" *ngIf="product.isAdded"
+                                        <button type="button" (click)="managementToCart(product)" *ngIf="product.isAdded"
                                         class="btn btn-danger">Sacar del carrito</button>
-                                        <button type="button" (click)="managementToCart($event, product)"  *ngIf="!product.isAdded"
+                                        <button type="button" (click)="managementToCart(product)"  *ngIf="!product.isAdded"
                                         class="btn btn-success">Añadir al carrito</button>
                                     </span>
                                     <input class="form-control" *ngIf="!product.isAdded" name="countProduct" 
-                                    [(ngModel)]="product.requestCount"  style="display: inline-block; width: 60px;" min="0"
+                                    [(ngModel)]="product.requestCount" naturalNumbersOnly  style="display: inline-block; width: 60px;" min="0"
                                     type="number">
                                     <h3 class="card-text" *ngIf="product.isAdded"  style="display: inline-block; width: 60px;">{{product.requestCount}}</h3>
                                 

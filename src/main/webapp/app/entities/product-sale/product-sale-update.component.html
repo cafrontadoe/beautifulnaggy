@@ -41,10 +41,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_product">Product</label>
-                    <select class="form-control" id="field_product" name="product" [(ngModel)]="productSale.product" >
+                    <label class="form-control-label" for="field_sale">Sale</label>
+                    <select class="form-control" id="field_sale" name="sale" [(ngModel)]="productSale.sale" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="productOption.id === productSale.product?.id ? productSale.product : productOption" *ngFor="let productOption of products; trackBy: trackProductById">{{productOption.id}}</option>
+                        <option [ngValue]="saleOption.id === productSale.sale?.id ? productSale.sale : saleOption" *ngFor="let saleOption of sales; trackBy: trackSaleById">{{saleOption.id}}</option>
                     </select>
                 </div>
             </div>

@@ -35,12 +35,6 @@
                         <a [routerLink]="['/type-doc', userClient.typeDoc?.id, 'view']">{{userClient.typeDoc?.id}}</a>
                     </div>
                 </dd>
-                <dt><span>Sale</span></dt>
-                <dd>
-                    <div *ngIf="userClient.sale">
-                        <a [routerLink]="['/sale', userClient.sale?.id, 'view']">{{userClient.sale?.id}}</a>
-                    </div>
-                </dd>
             </dl>
 
             <button type="submit"

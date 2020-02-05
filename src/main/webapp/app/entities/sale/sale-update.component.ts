@@ -8,8 +8,8 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
 import { ISale } from 'app/shared/model/sale.model';
 import { SaleService } from './sale.service';
-import { IProductSale } from 'app/shared/model/product-sale.model';
-import { ProductSaleService } from 'app/entities/product-sale';
+import { IUserClient } from 'app/shared/model/user-client.model';
+import { UserClientService } from 'app/entities/user-client';
 
 @Component({
     selector: 'jhi-sale-update',
@@ -19,14 +19,14 @@ export class SaleUpdateComponent implements OnInit {
     sale: ISale;
     isSaving: boolean;
 
-    productsales: IProductSale[];
+    userclients: IUserClient[];
     creationDate: string;
     managementDate: string;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected saleService: SaleService,
-        protected productSaleService: ProductSaleService,
+        protected userClientService: UserClientService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -37,13 +37,13 @@ export class SaleUpdateComponent implements OnInit {
             this.creationDate = this.sale.creationDate != null ? this.sale.creationDate.format(DATE_TIME_FORMAT) : null;
             this.managementDate = this.sale.managementDate != null ? this.sale.managementDate.format(DATE_TIME_FORMAT) : null;
         });
-        this.productSaleService
+        this.userClientService
             .query()
             .pipe(
-                filter((mayBeOk: HttpResponse<IProductSale[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IProductSale[]>) => response.body)
+                filter((mayBeOk: HttpResponse<IUserClient[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IUserClient[]>) => response.body)
             )
-            .subscribe((res: IProductSale[]) => (this.productsales = res), (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: IUserClient[]) => (this.userclients = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -78,7 +78,7 @@ export class SaleUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackProductSaleById(index: number, item: IProductSale) {
+    trackUserClientById(index: number, item: IUserClient) {
         return item.id;
     }
 }

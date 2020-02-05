@@ -45,10 +45,8 @@
             <column name="address" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+
             <column name="type_doc_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_user_client_type_doc_id" />
-            </column>
-            <column name="sale_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

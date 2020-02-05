@@ -1,15 +1,12 @@
 package com.eit.beautifulnaggy.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -56,12 +53,14 @@ public class Product implements Serializable {
     @Column(name = "packaging")
     private String packaging;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private ProductSale productSale;
+
     @ManyToOne
     @JsonIgnoreProperties("products")
     private ProductCarousel productCaroucel;
 
-    @OneToMany(mappedBy = "product")
-    private Set<ProductSale> productSales = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -188,6 +187,19 @@ public class Product implements Serializable {
         this.packaging = packaging;
     }
 
+    public ProductSale getProductSale() {
+        return productSale;
+    }
+
+    public Product productSale(ProductSale productSale) {
+        this.productSale = productSale;
+        return this;
+    }
+
+    public void setProductSale(ProductSale productSale) {
+        this.productSale = productSale;
+    }
+
     public ProductCarousel getProductCaroucel() {
         return productCaroucel;
     }
@@ -199,31 +211,6 @@ public class Product implements Serializable {
 
     public void setProductCaroucel(ProductCarousel productCarousel) {
         this.productCaroucel = productCarousel;
-    }
-
-    public Set<ProductSale> getProductSales() {
-        return productSales;
-    }
-
-    public Product productSales(Set<ProductSale> productSales) {
-        this.productSales = productSales;
-        return this;
-    }
-
-    public Product addProductSale(ProductSale productSale) {
-        this.productSales.add(productSale);
-        productSale.setProduct(this);
-        return this;
-    }
-
-    public Product removeProductSale(ProductSale productSale) {
-        this.productSales.remove(productSale);
-        productSale.setProduct(null);
-        return this;
-    }
-
-    public void setProductSales(Set<ProductSale> productSales) {
-        this.productSales = productSales;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

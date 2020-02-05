@@ -11,17 +11,12 @@ import { SaleDetailComponent } from './sale-detail.component';
 import { SaleUpdateComponent } from './sale-update.component';
 import { SaleDeletePopupComponent } from './sale-delete-dialog.component';
 import { ISale } from 'app/shared/model/sale.model';
-import { SaleClientComponent } from './sale-client/sale-client.component';
 
 @Injectable({ providedIn: 'root' })
 export class SaleResolve implements Resolve<ISale> {
     constructor(private service: SaleService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ISale> {
-        console.log('route');
-        console.log(route);
-        console.log('state');
-        console.log(state);
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
             return this.service.find(id).pipe(
@@ -52,18 +47,6 @@ export const saleRoute: Routes = [
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'Sales'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'new-client',
-        component: SaleClientComponent,
-        resolve: {
-            sale: SaleResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'Sale client'
         },
         canActivate: [UserRouteAccessService]
     },

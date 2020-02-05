@@ -16,6 +16,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import java.time.Instant;
+
 /**
  * REST controller for managing Sale.
  */
@@ -46,6 +48,9 @@ public class SaleResource {
         if (sale.getId() != null) {
             throw new BadRequestAlertException("A new sale cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        sale.setCreationDate(Instant.now());
+        System.out.println("===========>creationDate");
+        System.out.println(sale.getCreationDate());
         Sale result = saleRepository.save(sale);
         return ResponseEntity.created(new URI("/api/sales/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

@@ -1,10 +1,11 @@
 <div class="preview" style="position: fixed; left: 100px; z-index: 100;"
   *ngIf="productSaleList && productSaleList.length" [class.expanded]='expanded'>
-  <button [class.not-shown]='!productSaleList.length  || expanded' type="button" class="circle"
-    (click)="onCartClick()">
+  <button [class.not-shown]='!productSaleList.length  || expanded' type="button" class="circle" (click)="onCartClick()">
     <img src="../../assets/cart_white.svg" alt="cart" />
     <div class="indicator"><span>{{numProducts}}</span></div>
   </button>
+
+
 
 
   <div class="fill" [style.height]="expanded ? expandedHeight : inherit" [class.not-shown]='!products.length'
@@ -16,20 +17,25 @@
 
           <div class="col-3-sm description">
             <p style="display: inline-block; font-size: 1.rem !important;">
-              {{item.product.nombre.substr(0, 31)}}{{item.product.nombre.length > 31 ? '...'  : '  '}} </p>
+              {{item.product.nombre.substr(0, 31)}}{{item.product.nombre.length > 31 ? '...'  : '  '}}    </p>
           </div>
 
 
           <div class="col-3-sm description">
-            <p style="display: inline-block; font-size: 1.rem !important;"> x {{item.countProduct}} </p>
+            <p style="display: inline-block; font-size: 1.rem !important;">      x {{item.countProduct}}     </p>
           </div>
           <div class="col-6-sm price">
             <p style="display: inline-block; font-size: 1.rem !important;">
-              {{item.countProduct* item.product.priceBeauty | currency:'USD':'symbol':'1.0-0' }}</p>
+                    =  {{item.countProduct * item.product.priceBeauty | currency:'USD':'symbol':'1.0-0' }}</p>
           </div>
         </div>
       </div>
-      <button type="button" class="pay-btn">Pagar {{totalCost | currency:'USD':'symbol':'1.0-0'}}</button>
+
+      
+
+
+      <button type="button" (click)="sendRequest($event)" class="pay-btn">Enviar pedido
+        {{totalCost | currency:'USD':'symbol':'1.0-0'}}</button>
     </div>
     <button type="button" class="close-btn" *ngIf='expanded' (click)="onCartClick()">Cerrar</button>
   </div>

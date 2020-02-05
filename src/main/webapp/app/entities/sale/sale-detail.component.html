@@ -33,10 +33,10 @@
                 <dd>
                     <span>{{sale.discount}}</span>
                 </dd>
-                <dt><span>Product Sale</span></dt>
+                <dt><span>User Client</span></dt>
                 <dd>
-                    <div *ngIf="sale.productSale">
-                        <a [routerLink]="['/product-sale', sale.productSale?.id, 'view']">{{sale.productSale?.id}}</a>
+                    <div *ngIf="sale.userClient">
+                        <a [routerLink]="['/user-client', sale.userClient?.id, 'view']">{{sale.userClient?.id}}</a>
                     </div>
                 </dd>
             </dl>

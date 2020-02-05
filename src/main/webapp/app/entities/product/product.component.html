@@ -23,6 +23,7 @@
             <th><span>Price Beauty</span></th>
             <th><span>Price Client</span></th>
             <th><span>Packaging</span></th>
+            <th><span>Product Sale</span></th>
             <th><span>Product Caroucel</span></th>
             <th></th>
             </tr>
@@ -41,6 +42,11 @@
                 <td>{{product.priceBeauty}}</td>
                 <td>{{product.priceClient}}</td>
                 <td>{{product.packaging}}</td>
+                <td>
+                    <div *ngIf="product.productSale">
+                        <a [routerLink]="['../product-sale', product.productSale?.id, 'view' ]" >{{product.productSale?.id}}</a>
+                    </div>
+                </td>
                 <td>
                     <div *ngIf="product.productCaroucel">
                         <a [routerLink]="['../product-carousel', product.productCaroucel?.id, 'view' ]" >{{product.productCaroucel?.id}}</a>

@@ -14,11 +14,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="type_doc"/>
 
-        <addForeignKeyConstraint baseColumnNames="sale_id"
-                                 baseTableName="user_client"
-                                 constraintName="fk_user_client_sale_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="sale"/>
-
     </changeSet>
 </databaseChangeLog>

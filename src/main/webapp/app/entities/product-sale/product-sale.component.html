@@ -17,7 +17,7 @@
             <th><span>ID</span></th>
             <th><span>Count Product</span></th>
             <th><span>Total Product</span></th>
-            <th><span>Product</span></th>
+            <th><span>Sale</span></th>
             <th></th>
             </tr>
             </thead>
@@ -27,8 +27,8 @@
                 <td>{{productSale.countProduct}}</td>
                 <td>{{productSale.totalProduct}}</td>
                 <td>
-                    <div *ngIf="productSale.product">
-                        <a [routerLink]="['../product', productSale.product?.id, 'view' ]" >{{productSale.product?.id}}</a>
+                    <div *ngIf="productSale.sale">
+                        <a [routerLink]="['../sale', productSale.sale?.id, 'view' ]" >{{productSale.sale?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">

@@ -10,7 +10,7 @@
         },
         {
             "fieldName": "total",
-            "fieldType": "String",
+            "fieldType": "Double",
             "fieldValidateRules": [
                 "required"
             ]
@@ -45,15 +45,15 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "productSale",
-            "otherEntityName": "productSale",
+            "relationshipName": "userClient",
+            "otherEntityName": "userClient",
             "otherEntityField": "id",
             "otherEntityRelationshipName": "sale"
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "userClient",
-            "otherEntityName": "userClient",
+            "relationshipName": "productSale",
+            "otherEntityName": "productSale",
             "otherEntityRelationshipName": "sale"
         }
     ],

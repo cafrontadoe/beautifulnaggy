@@ -15,6 +15,8 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing ProductSale.
@@ -76,10 +78,18 @@ public class ProductSaleResource {
     /**
      * GET  /product-sales : get all the productSales.
      *
+     * @param filter the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of productSales in body
      */
     @GetMapping("/product-sales")
-    public List<ProductSale> getAllProductSales() {
+    public List<ProductSale> getAllProductSales(@RequestParam(required = false) String filter) {
+        if ("product-is-null".equals(filter)) {
+            log.debug("REST request to get all ProductSales where product is null");
+            return StreamSupport
+                .stream(productSaleRepository.findAll().spliterator(), false)
+                .filter(productSale -> productSale.getProduct() == null)
+                .collect(Collectors.toList());
+        }
         log.debug("REST request to get all ProductSales");
         return productSaleRepository.findAll();
     }

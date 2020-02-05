@@ -5,7 +5,6 @@ export interface IProduct {
     id?: number;
     imageContentType?: string;
     image?: any;
-    imageToShow?: any;
     nombre?: string;
     description?: string;
     codigo?: string;
@@ -14,8 +13,9 @@ export interface IProduct {
     priceClient?: number;
     packaging?: string;
     productCaroucel?: IProductCarousel;
-    productSales?: IProductSale[];
-    isAdded?: Boolean;
+    productSale?: IProductSale;
+    imageToShow?: any;
+    isAdded?: any;
     requestCount?: number;
 }
 
@@ -24,7 +24,6 @@ export class Product implements IProduct {
         public id?: number,
         public imageContentType?: string,
         public image?: any,
-        public imageToShow?: any,
         public nombre?: string,
         public description?: string,
         public codigo?: string,
@@ -33,8 +32,6 @@ export class Product implements IProduct {
         public priceClient?: number,
         public packaging?: string,
         public productCaroucel?: IProductCarousel,
-        public productSales?: IProductSale[],
-        public isAdded?: Boolean,
-        public requestCount?: number
+        public productSale?: IProductSale
     ) {}
 }

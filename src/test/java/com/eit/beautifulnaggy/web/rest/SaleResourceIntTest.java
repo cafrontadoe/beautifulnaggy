@@ -45,8 +45,8 @@ public class SaleResourceIntTest {
     private static final Instant DEFAULT_CREATION_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CREATION_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_TOTAL = "AAAAAAAAAA";
-    private static final String UPDATED_TOTAL = "BBBBBBBBBB";
+    private static final Double DEFAULT_TOTAL = 1D;
+    private static final Double UPDATED_TOTAL = 2D;
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
@@ -247,7 +247,7 @@ public class SaleResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(sale.getId().intValue())))
             .andExpect(jsonPath("$.[*].creationDate").value(hasItem(DEFAULT_CREATION_DATE.toString())))
-            .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.toString())))
+            .andExpect(jsonPath("$.[*].total").value(hasItem(DEFAULT_TOTAL.doubleValue())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].managementDate").value(hasItem(DEFAULT_MANAGEMENT_DATE.toString())))
             .andExpect(jsonPath("$.[*].totalCost").value(hasItem(DEFAULT_TOTAL_COST.doubleValue())))
@@ -267,7 +267,7 @@ public class SaleResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(sale.getId().intValue()))
             .andExpect(jsonPath("$.creationDate").value(DEFAULT_CREATION_DATE.toString()))
-            .andExpect(jsonPath("$.total").value(DEFAULT_TOTAL.toString()))
+            .andExpect(jsonPath("$.total").value(DEFAULT_TOTAL.doubleValue()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.managementDate").value(DEFAULT_MANAGEMENT_DATE.toString()))
             .andExpect(jsonPath("$.totalCost").value(DEFAULT_TOTAL_COST.doubleValue()))

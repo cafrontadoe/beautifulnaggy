@@ -22,7 +22,7 @@
             <th><span>Total Cost</span></th>
             <th><span>Iva</span></th>
             <th><span>Discount</span></th>
-            <th><span>Product Sale</span></th>
+            <th><span>User Client</span></th>
             <th></th>
             </tr>
             </thead>
@@ -37,8 +37,8 @@
                 <td>{{sale.iva}}</td>
                 <td>{{sale.discount}}</td>
                 <td>
-                    <div *ngIf="sale.productSale">
-                        <a [routerLink]="['../product-sale', sale.productSale?.id, 'view' ]" >{{sale.productSale?.id}}</a>
+                    <div *ngIf="sale.userClient">
+                        <a [routerLink]="['../user-client', sale.userClient?.id, 'view' ]" >{{sale.userClient?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">

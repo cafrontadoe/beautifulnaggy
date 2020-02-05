@@ -28,12 +28,16 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="field_total">Total</label>
-                    <input type="text" class="form-control" name="total" id="field_total"
+                    <input type="number" class="form-control" name="total" id="field_total"
                         [(ngModel)]="sale.total" required/>
                     <div [hidden]="!(editForm.controls.total?.dirty && editForm.controls.total?.invalid)">
                         <small class="form-text text-danger"
                         [hidden]="!editForm.controls.total?.errors?.required">
                         This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.total?.errors?.number">
+                            This field should be a number.
                         </small>
                     </div>
                 </div>
@@ -86,10 +90,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_productSale">Product Sale</label>
-                    <select class="form-control" id="field_productSale" name="productSale" [(ngModel)]="sale.productSale" >
+                    <label class="form-control-label" for="field_userClient">User Client</label>
+                    <select class="form-control" id="field_userClient" name="userClient" [(ngModel)]="sale.userClient" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="productSaleOption.id === sale.productSale?.id ? sale.productSale : productSaleOption" *ngFor="let productSaleOption of productsales; trackBy: trackProductSaleById">{{productSaleOption.id}}</option>
+                        <option [ngValue]="userClientOption.id === sale.userClient?.id ? sale.userClient : userClientOption" *ngFor="let userClientOption of userclients; trackBy: trackUserClientById">{{userClientOption.id}}</option>
                     </select>
                 </div>
             </div>

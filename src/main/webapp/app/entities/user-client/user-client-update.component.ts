@@ -8,8 +8,6 @@ import { IUserClient } from 'app/shared/model/user-client.model';
 import { UserClientService } from './user-client.service';
 import { ITypeDoc } from 'app/shared/model/type-doc.model';
 import { TypeDocService } from 'app/entities/type-doc';
-import { ISale } from 'app/shared/model/sale.model';
-import { SaleService } from 'app/entities/sale';
 
 @Component({
     selector: 'jhi-user-client-update',
@@ -21,13 +19,10 @@ export class UserClientUpdateComponent implements OnInit {
 
     typedocs: ITypeDoc[];
 
-    sales: ISale[];
-
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected userClientService: UserClientService,
         protected typeDocService: TypeDocService,
-        protected saleService: SaleService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -37,37 +32,12 @@ export class UserClientUpdateComponent implements OnInit {
             this.userClient = userClient;
         });
         this.typeDocService
-            .query({ filter: 'userclient-is-null' })
+            .query()
             .pipe(
                 filter((mayBeOk: HttpResponse<ITypeDoc[]>) => mayBeOk.ok),
                 map((response: HttpResponse<ITypeDoc[]>) => response.body)
             )
-            .subscribe(
-                (res: ITypeDoc[]) => {
-                    if (!this.userClient.typeDoc || !this.userClient.typeDoc.id) {
-                        this.typedocs = res;
-                    } else {
-                        this.typeDocService
-                            .find(this.userClient.typeDoc.id)
-                            .pipe(
-                                filter((subResMayBeOk: HttpResponse<ITypeDoc>) => subResMayBeOk.ok),
-                                map((subResponse: HttpResponse<ITypeDoc>) => subResponse.body)
-                            )
-                            .subscribe(
-                                (subRes: ITypeDoc) => (this.typedocs = [subRes].concat(res)),
-                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                            );
-                    }
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-        this.saleService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<ISale[]>) => mayBeOk.ok),
-                map((response: HttpResponse<ISale[]>) => response.body)
-            )
-            .subscribe((res: ISale[]) => (this.sales = res), (res: HttpErrorResponse) => this.onError(res.message));
+            .subscribe((res: ITypeDoc[]) => (this.typedocs = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -101,10 +71,6 @@ export class UserClientUpdateComponent implements OnInit {
     }
 
     trackTypeDocById(index: number, item: ITypeDoc) {
-        return item.id;
-    }
-
-    trackSaleById(index: number, item: ISale) {
         return item.id;
     }
 }

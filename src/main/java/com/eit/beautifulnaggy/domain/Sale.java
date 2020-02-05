@@ -26,13 +26,12 @@ public class Sale implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Column(name = "creation_date", nullable = false)
+    @Column(name = "creation_date")
     private Instant creationDate;
 
     @NotNull
     @Column(name = "total", nullable = false)
-    private String total;
+    private Double total;
 
     @Column(name = "description")
     private String description;
@@ -53,10 +52,10 @@ public class Sale implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("sales")
-    private ProductSale productSale;
+    private UserClient userClient;
 
     @OneToMany(mappedBy = "sale")
-    private Set<UserClient> userClients = new HashSet<>();
+    private Set<ProductSale> productSales = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -79,16 +78,16 @@ public class Sale implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public String getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public Sale total(String total) {
+    public Sale total(Double total) {
         this.total = total;
         return this;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 
@@ -157,42 +156,42 @@ public class Sale implements Serializable {
         this.discount = discount;
     }
 
-    public ProductSale getProductSale() {
-        return productSale;
+    public UserClient getUserClient() {
+        return userClient;
     }
 
-    public Sale productSale(ProductSale productSale) {
-        this.productSale = productSale;
+    public Sale userClient(UserClient userClient) {
+        this.userClient = userClient;
         return this;
     }
 
-    public void setProductSale(ProductSale productSale) {
-        this.productSale = productSale;
+    public void setUserClient(UserClient userClient) {
+        this.userClient = userClient;
     }
 
-    public Set<UserClient> getUserClients() {
-        return userClients;
+    public Set<ProductSale> getProductSales() {
+        return productSales;
     }
 
-    public Sale userClients(Set<UserClient> userClients) {
-        this.userClients = userClients;
+    public Sale productSales(Set<ProductSale> productSales) {
+        this.productSales = productSales;
         return this;
     }
 
-    public Sale addUserClient(UserClient userClient) {
-        this.userClients.add(userClient);
-        userClient.setSale(this);
+    public Sale addProductSale(ProductSale productSale) {
+        this.productSales.add(productSale);
+        productSale.setSale(this);
         return this;
     }
 
-    public Sale removeUserClient(UserClient userClient) {
-        this.userClients.remove(userClient);
-        userClient.setSale(null);
+    public Sale removeProductSale(ProductSale productSale) {
+        this.productSales.remove(productSale);
+        productSale.setSale(null);
         return this;
     }
 
-    public void setUserClients(Set<UserClient> userClients) {
-        this.userClients = userClients;
+    public void setProductSales(Set<ProductSale> productSales) {
+        this.productSales = productSales;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -221,7 +220,7 @@ public class Sale implements Serializable {
         return "Sale{" +
             "id=" + getId() +
             ", creationDate='" + getCreationDate() + "'" +
-            ", total='" + getTotal() + "'" +
+            ", total=" + getTotal() +
             ", description='" + getDescription() + "'" +
             ", managementDate='" + getManagementDate() + "'" +
             ", totalCost=" + getTotalCost() +

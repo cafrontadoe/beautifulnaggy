@@ -1,12 +1,15 @@
 package com.eit.beautifulnaggy.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -44,14 +47,12 @@ public class UserClient implements Serializable {
     @Column(name = "address", nullable = false)
     private String address;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private TypeDoc typeDoc;
-
     @ManyToOne
     @JsonIgnoreProperties("userClients")
-    private Sale sale;
+    private TypeDoc typeDoc;
 
+    @OneToMany(mappedBy = "userClient")
+    private Set<Sale> sales = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -152,17 +153,29 @@ public class UserClient implements Serializable {
         this.typeDoc = typeDoc;
     }
 
-    public Sale getSale() {
-        return sale;
+    public Set<Sale> getSales() {
+        return sales;
     }
 
-    public UserClient sale(Sale sale) {
-        this.sale = sale;
+    public UserClient sales(Set<Sale> sales) {
+        this.sales = sales;
         return this;
     }
 
-    public void setSale(Sale sale) {
-        this.sale = sale;
+    public UserClient addSale(Sale sale) {
+        this.sales.add(sale);
+        sale.setUserClient(this);
+        return this;
+    }
+
+    public UserClient removeSale(Sale sale) {
+        this.sales.remove(sale);
+        sale.setUserClient(null);
+        return this;
+    }
+
+    public void setSales(Set<Sale> sales) {
+        this.sales = sales;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

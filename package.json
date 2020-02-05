@@ -31,7 +31,10 @@
         "rxjs": "6.3.3",
         "swagger-ui": "2.2.10",
         "tslib": "1.9.3",
-        "zone.js": "0.8.29"
+        "zone.js": "0.8.29",
+        "sweetalert2": "^8.19.0",
+        "@toverux/ngx-sweetalert2": "3.4.0",
+        "@ng-select/ng-select": "^2.16.0"
     },
     "devDependencies": {
         "@angular/cli": "7.2.3",

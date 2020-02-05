@@ -6,6 +6,8 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IProductSale } from 'app/shared/model/product-sale.model';
 import { ProductSaleService } from './product-sale.service';
+import { ISale } from 'app/shared/model/sale.model';
+import { SaleService } from 'app/entities/sale';
 import { IProduct } from 'app/shared/model/product.model';
 import { ProductService } from 'app/entities/product';
 
@@ -17,11 +19,14 @@ export class ProductSaleUpdateComponent implements OnInit {
     productSale: IProductSale;
     isSaving: boolean;
 
+    sales: ISale[];
+
     products: IProduct[];
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected productSaleService: ProductSaleService,
+        protected saleService: SaleService,
         protected productService: ProductService,
         protected activatedRoute: ActivatedRoute
     ) {}
@@ -31,6 +36,13 @@ export class ProductSaleUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ productSale }) => {
             this.productSale = productSale;
         });
+        this.saleService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<ISale[]>) => mayBeOk.ok),
+                map((response: HttpResponse<ISale[]>) => response.body)
+            )
+            .subscribe((res: ISale[]) => (this.sales = res), (res: HttpErrorResponse) => this.onError(res.message));
         this.productService
             .query()
             .pipe(
@@ -68,6 +80,10 @@ export class ProductSaleUpdateComponent implements OnInit {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackSaleById(index: number, item: ISale) {
+        return item.id;
     }
 
     trackProductById(index: number, item: IProduct) {

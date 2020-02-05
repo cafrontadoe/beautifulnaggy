@@ -97,6 +97,15 @@ public class UserClientResource {
         return ResponseUtil.wrapOrNotFound(userClient);
     }
 
+   @GetMapping("/user-clients/email/{email}")
+    public List<UserClient> getUserClientByEmail(@PathVariable String email) {
+        log.debug("REST request to get UserClient : {}", email);
+        List<UserClient> userClient = userClientRepository.searchUserTrackerByEmail(email);
+        return userClient;
+    }
+
+
+
     /**
      * DELETE  /user-clients/:id : delete the "id" userClient.
      *

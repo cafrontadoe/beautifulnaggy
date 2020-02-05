@@ -28,7 +28,7 @@ entity ProductCarousel {
 
 entity Sale {
 	creationDate Instant required,
-    total String required,
+    total Double required,
     description String,
     managementDate Instant,
     totalCost Double required,
@@ -41,14 +41,14 @@ entity ProductSale {
     totalProduct Double required
 }
 
-
-relationship OneToOne {
-	UserClient{typeDoc} to TypeDoc{userClient},
+relationship OneToOne{
+Product{productSale} to ProductSale{product}
 }
 
 relationship ManyToOne {
+
+	UserClient{typeDoc} to TypeDoc{userClient}
 	Product{productCaroucel} to ProductCarousel{product},
-	ProductSale{product} to Product{productSale},
-    Sale{productSale} to ProductSale{sale}
-    UserClient{sale} to Sale{userClient}
+    ProductSale{sale} to Sale{productSale},
+    Sale{userClient} to UserClient{sale}
 }

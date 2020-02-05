@@ -3,9 +3,9 @@ import { IUserClient } from 'app/shared/model/user-client.model';
 export interface ITypeDoc {
     id?: number;
     description?: string;
-    userClient?: IUserClient;
+    userClients?: IUserClient[];
 }
 
 export class TypeDoc implements ITypeDoc {
-    constructor(public id?: number, public description?: string, public userClient?: IUserClient) {}
+    constructor(public id?: number, public description?: string, public userClients?: IUserClient[]) {}
 }
