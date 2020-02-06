@@ -51,7 +51,12 @@ public class SaleResource {
         sale.setCreationDate(Instant.now());
         System.out.println("===========>creationDate");
         System.out.println(sale.getCreationDate());
+        System.out.println("======================================>");
+        System.out.println(sale);
+        System.out.println(sale.getProductSales());
         Sale result = saleRepository.save(sale);
+
+
         return ResponseEntity.created(new URI("/api/sales/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -100,6 +105,16 @@ public class SaleResource {
         log.debug("REST request to get Sale : {}", id);
         Optional<Sale> sale = saleRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(sale);
+    }
+
+
+    @GetMapping("/sales/email/{email}")
+    public List<Sale> getSaleByEmail(@PathVariable String email) {
+        log.debug("REST request to get Sale : {}", email);
+        List<Sale> sale = saleRepository.getSaleByEmail(email);
+        System.out.print("===================>");
+        System.out.print(sale);
+        return sale;
     }
 
     /**

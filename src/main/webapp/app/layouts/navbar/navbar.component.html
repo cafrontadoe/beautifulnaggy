@@ -19,13 +19,15 @@
                     </span>
                 </a>
             </li>
-            <!--     
-                <li class="nav-item"  >
-                    <a class="nav-link" routerLink="sale/new-client" (click)="activateSaleService()">
-                        <jhi-app-cart></jhi-app-cart>
-                    </a>
-                </li>
-            -->
+            
+            <li class="nav-item"  >
+                <a class="nav-link" routerLink="/sale/mis-pedidos" (click)="collapseNavbar()">
+                    <span>
+                        <span>Mis Pedidos</span>
+                    </span>
+                </a>
+            </li>
+            
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact: true}">

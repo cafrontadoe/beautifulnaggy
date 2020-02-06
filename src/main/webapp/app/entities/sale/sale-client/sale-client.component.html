@@ -1,3 +1,48 @@
-<p>
-  sale-client works!
-</p>
+<div>
+  <h2 id="page-heading">
+      <span>mis pedidos</span>
+     
+  </h2>
+</div>
+<div class="table-responsive" *ngIf="sales">
+  <table class="table table-striped">
+      <thead>
+      <tr>
+      <th><span>ID</span></th>
+      <th><span>Fecha de creación</span></th>
+      <th><span>Dia de entrega</span></th>
+      <!--     
+      <th><span>Fecha de entrega</span></th>
+      <th><span>Discount</span></th>
+    -->
+    <th><span>Total Cost</span></th>
+      <th><span>User Client</span></th>
+      <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let sale of sales ;trackBy: trackId">
+          <td><a [routerLink]="['/sale', sale.id, 'view' ]">{{sale.id}}</a></td>
+          <td>{{sale.creationDate | date:'medium'}}</td>
+          <td>{{sale.description}}</td>
+          <td>{{sale.totalCost | currency:'USD':'symbol':'1.0-0' }}</td>
+          <td>
+              <div *ngIf="sale.userClient">
+                  <a [routerLink]="['../user-client', sale.userClient?.id, 'view' ]" >{{sale.userClient?.id}}</a>
+              </div>
+          </td>
+          <td class="text-right">
+              <div class="btn-group flex-btn-group-container">
+                  <button type="submit"
+                          [routerLink]="['/sale', sale.id, 'view' ]"
+                          class="btn btn-info btn-sm">
+                      <fa-icon [icon]="'eye'"></fa-icon>
+                      <span class="d-none d-md-inline">Ver detalles</span>
+                  </button>
+                 
+              </div>
+          </td>
+      </tr>
+      </tbody>
+  </table>
+</div>

@@ -11,12 +11,21 @@ import {
     saleRoute,
     salePopupRoute
 } from './';
+import { SaleClientComponent } from './sale-client/sale-client.component';
 
 const ENTITY_STATES = [...saleRoute, ...salePopupRoute];
 
 @NgModule({
     imports: [BeautifulNaggySharedModule, RouterModule.forChild(ENTITY_STATES)],
-    declarations: [SaleComponent, SaleDetailComponent, SaleUpdateComponent, SaleDeleteDialogComponent, SaleDeletePopupComponent],
+    declarations: [
+        SaleComponent,
+        SaleDetailComponent,
+        SaleUpdateComponent,
+        SaleDeleteDialogComponent,
+        SaleDeletePopupComponent,
+        SaleClientComponent
+    ],
+    exports: [SaleClientComponent],
     entryComponents: [SaleComponent, SaleUpdateComponent, SaleDeleteDialogComponent, SaleDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

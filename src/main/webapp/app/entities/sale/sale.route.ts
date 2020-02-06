@@ -11,6 +11,7 @@ import { SaleDetailComponent } from './sale-detail.component';
 import { SaleUpdateComponent } from './sale-update.component';
 import { SaleDeletePopupComponent } from './sale-delete-dialog.component';
 import { ISale } from 'app/shared/model/sale.model';
+import { SaleClientComponent } from './sale-client/sale-client.component';
 
 @Injectable({ providedIn: 'root' })
 export class SaleResolve implements Resolve<ISale> {
@@ -47,6 +48,18 @@ export const saleRoute: Routes = [
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'Sales'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'mis-pedidos',
+        component: SaleClientComponent,
+        resolve: {
+            sale: SaleResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'Mis pedidos'
         },
         canActivate: [UserRouteAccessService]
     },

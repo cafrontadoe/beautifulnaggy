@@ -13,6 +13,7 @@ import { UserClientService } from 'app/entities/user-client/user-client.service'
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { ProductSaleService } from 'app/entities/product-sale';
 
 const OFFSET_HEIGHT = 170;
 const PRODUCT_HEIGHT = 48;
@@ -50,7 +51,8 @@ export class CartComponent implements OnInit, OnChanges {
         private readonly saleService: SaleService,
         private readonly accountService: AccountService,
         private readonly userClientService: UserClientService,
-        private readonly loginModalService: LoginModalService
+        private readonly loginModalService: LoginModalService,
+        private readonly productSaleService: ProductSaleService
     ) {}
 
     ngOnInit() {
@@ -157,6 +159,7 @@ export class CartComponent implements OnInit, OnChanges {
         this.saleService.create(this.sale).subscribe(
             (res: any) => {
                 console.log(res);
+
                 this.messageService.openSucessConfirm({
                     title: 'El Pedido fue registrado exitosamente.',
                     text: 'podras ver los detalles de tus pedido en la opción de menú "Mis pedidos" ',
