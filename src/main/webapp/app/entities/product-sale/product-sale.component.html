@@ -15,6 +15,7 @@
             <thead>
             <tr>
             <th><span>ID</span></th>
+            <th><span>Id Product</span></th>
             <th><span>Count Product</span></th>
             <th><span>Total Product</span></th>
             <th><span>Sale</span></th>
@@ -24,6 +25,7 @@
             <tbody>
             <tr *ngFor="let productSale of productSales ;trackBy: trackId">
                 <td><a [routerLink]="['/product-sale', productSale.id, 'view' ]">{{productSale.id}}</a></td>
+                <td>{{productSale.idProduct}}</td>
                 <td>{{productSale.countProduct}}</td>
                 <td>{{productSale.totalProduct}}</td>
                 <td>

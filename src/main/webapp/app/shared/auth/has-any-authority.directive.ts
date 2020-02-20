@@ -1,5 +1,6 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { AccountService } from 'app/core/auth/account.service';
+import { identity } from 'rxjs';
 
 /**
  * @whatItDoes Conditionally includes an HTML element if current user has any
@@ -30,6 +31,9 @@ export class HasAnyAuthorityDirective {
         this.updateView();
         // Get notified each time authentication state changes.
         this.accountService.getAuthenticationState().subscribe(identity => this.updateView());
+        console.log('===========================>');
+        console.log(identity);
+        console.log('===========================>');
     }
 
     private updateView(): void {

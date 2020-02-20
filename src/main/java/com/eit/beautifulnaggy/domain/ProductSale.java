@@ -8,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -24,6 +26,10 @@ public class ProductSale implements Serializable {
     private Long id;
 
     @NotNull
+    @Column(name = "id_product", nullable = false)
+    private Integer idProduct;
+
+    @NotNull
     @Column(name = "count_product", nullable = false)
     private Integer countProduct;
 
@@ -31,13 +37,11 @@ public class ProductSale implements Serializable {
     @Column(name = "total_product", nullable = false)
     private Double totalProduct;
 
+    @OneToMany(mappedBy = "productSale")
+    private Set<Product> products = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("productSales")
     private Sale sale;
-
-    @OneToOne(mappedBy = "productSale")
-    @JsonIgnore
-    private Product product;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -46,6 +50,19 @@ public class ProductSale implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getIdProduct() {
+        return idProduct;
+    }
+
+    public ProductSale idProduct(Integer idProduct) {
+        this.idProduct = idProduct;
+        return this;
+    }
+
+    public void setIdProduct(Integer idProduct) {
+        this.idProduct = idProduct;
     }
 
     public Integer getCountProduct() {
@@ -74,6 +91,31 @@ public class ProductSale implements Serializable {
         this.totalProduct = totalProduct;
     }
 
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public ProductSale products(Set<Product> products) {
+        this.products = products;
+        return this;
+    }
+
+    public ProductSale addProduct(Product product) {
+        this.products.add(product);
+        product.setProductSale(this);
+        return this;
+    }
+
+    public ProductSale removeProduct(Product product) {
+        this.products.remove(product);
+        product.setProductSale(null);
+        return this;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
     public Sale getSale() {
         return sale;
     }
@@ -85,19 +127,6 @@ public class ProductSale implements Serializable {
 
     public void setSale(Sale sale) {
         this.sale = sale;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public ProductSale product(Product product) {
-        this.product = product;
-        return this;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -125,6 +154,7 @@ public class ProductSale implements Serializable {
     public String toString() {
         return "ProductSale{" +
             "id=" + getId() +
+            ", idProduct=" + getIdProduct() +
             ", countProduct=" + getCountProduct() +
             ", totalProduct=" + getTotalProduct() +
             "}";

@@ -6,10 +6,10 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IProduct } from 'app/shared/model/product.model';
 import { ProductService } from './product.service';
-import { IProductSale } from 'app/shared/model/product-sale.model';
-import { ProductSaleService } from 'app/entities/product-sale';
 import { IProductCarousel } from 'app/shared/model/product-carousel.model';
 import { ProductCarouselService } from 'app/entities/product-carousel';
+import { IProductSale } from 'app/shared/model/product-sale.model';
+import { ProductSaleService } from 'app/entities/product-sale';
 
 @Component({
     selector: 'jhi-product-update',
@@ -19,16 +19,16 @@ export class ProductUpdateComponent implements OnInit {
     product: IProduct;
     isSaving: boolean;
 
-    productsales: IProductSale[];
-
     productcarousels: IProductCarousel[];
+
+    productsales: IProductSale[];
 
     constructor(
         protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
         protected productService: ProductService,
-        protected productSaleService: ProductSaleService,
         protected productCarouselService: ProductCarouselService,
+        protected productSaleService: ProductSaleService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -37,31 +37,6 @@ export class ProductUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ product }) => {
             this.product = product;
         });
-        this.productSaleService
-            .query({ filter: 'product-is-null' })
-            .pipe(
-                filter((mayBeOk: HttpResponse<IProductSale[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IProductSale[]>) => response.body)
-            )
-            .subscribe(
-                (res: IProductSale[]) => {
-                    if (!this.product.productSale || !this.product.productSale.id) {
-                        this.productsales = res;
-                    } else {
-                        this.productSaleService
-                            .find(this.product.productSale.id)
-                            .pipe(
-                                filter((subResMayBeOk: HttpResponse<IProductSale>) => subResMayBeOk.ok),
-                                map((subResponse: HttpResponse<IProductSale>) => subResponse.body)
-                            )
-                            .subscribe(
-                                (subRes: IProductSale) => (this.productsales = [subRes].concat(res)),
-                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                            );
-                    }
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
         this.productCarouselService
             .query()
             .pipe(
@@ -69,6 +44,13 @@ export class ProductUpdateComponent implements OnInit {
                 map((response: HttpResponse<IProductCarousel[]>) => response.body)
             )
             .subscribe((res: IProductCarousel[]) => (this.productcarousels = res), (res: HttpErrorResponse) => this.onError(res.message));
+        this.productSaleService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IProductSale[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IProductSale[]>) => response.body)
+            )
+            .subscribe((res: IProductSale[]) => (this.productsales = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     byteSize(field) {
@@ -113,11 +95,11 @@ export class ProductUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackProductSaleById(index: number, item: IProductSale) {
+    trackProductCarouselById(index: number, item: IProductCarousel) {
         return item.id;
     }
 
-    trackProductCarouselById(index: number, item: IProductCarousel) {
+    trackProductSaleById(index: number, item: IProductSale) {
         return item.id;
     }
 }

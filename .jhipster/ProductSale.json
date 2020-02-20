@@ -2,6 +2,13 @@
     "name": "ProductSale",
     "fields": [
         {
+            "fieldName": "idProduct",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "countProduct",
             "fieldType": "Integer",
             "fieldValidateRules": [
@@ -18,17 +25,16 @@
     ],
     "relationships": [
         {
+            "relationshipType": "one-to-many",
+            "relationshipName": "product",
+            "otherEntityName": "product",
+            "otherEntityRelationshipName": "productSale"
+        },
+        {
             "relationshipType": "many-to-one",
             "relationshipName": "sale",
             "otherEntityName": "sale",
             "otherEntityField": "id",
-            "otherEntityRelationshipName": "productSale"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "product",
-            "otherEntityName": "product",
-            "ownerSide": false,
             "otherEntityRelationshipName": "productSale"
         }
     ],

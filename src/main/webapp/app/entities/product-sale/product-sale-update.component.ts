@@ -8,8 +8,6 @@ import { IProductSale } from 'app/shared/model/product-sale.model';
 import { ProductSaleService } from './product-sale.service';
 import { ISale } from 'app/shared/model/sale.model';
 import { SaleService } from 'app/entities/sale';
-import { IProduct } from 'app/shared/model/product.model';
-import { ProductService } from 'app/entities/product';
 
 @Component({
     selector: 'jhi-product-sale-update',
@@ -21,13 +19,10 @@ export class ProductSaleUpdateComponent implements OnInit {
 
     sales: ISale[];
 
-    products: IProduct[];
-
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected productSaleService: ProductSaleService,
         protected saleService: SaleService,
-        protected productService: ProductService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -43,13 +38,6 @@ export class ProductSaleUpdateComponent implements OnInit {
                 map((response: HttpResponse<ISale[]>) => response.body)
             )
             .subscribe((res: ISale[]) => (this.sales = res), (res: HttpErrorResponse) => this.onError(res.message));
-        this.productService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IProduct[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IProduct[]>) => response.body)
-            )
-            .subscribe((res: IProduct[]) => (this.products = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -83,10 +71,6 @@ export class ProductSaleUpdateComponent implements OnInit {
     }
 
     trackSaleById(index: number, item: ISale) {
-        return item.id;
-    }
-
-    trackProductById(index: number, item: IProduct) {
         return item.id;
     }
 }

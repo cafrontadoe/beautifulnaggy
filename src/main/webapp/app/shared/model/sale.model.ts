@@ -5,6 +5,7 @@ import { IProductSale } from 'app/shared/model/product-sale.model';
 export interface ISale {
     id?: number;
     creationDate?: Moment;
+    creationDateString?: string;
     total?: number;
     description?: string;
     managementDate?: Moment;

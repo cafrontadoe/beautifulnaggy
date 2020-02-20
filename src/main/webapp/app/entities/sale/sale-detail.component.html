@@ -1,57 +1,80 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="sale">
-            <h2><span>Sale</span> {{sale.id}}</h2>
+            <h2><span>Pedido de compra</span> {{sale.id}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
-                <dt><span>Creation Date</span></dt>
+                <dt><span>Fecha de creación</span></dt>
                 <dd>
-                    <span>{{sale.creationDate}}</span>
+                    <span>{{sale.creationDateString}}</span>
                 </dd>
-                <dt><span>Total</span></dt>
-                <dd>
-                    <span>{{sale.total}}</span>
-                </dd>
-                <dt><span>Description</span></dt>
+
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio por unidad</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let productSale of productSales; index as i">
+                            <th scope="row">{{ i + 1 }}</th>
+                            <td>
+                                {{ productSale.nameProduct }}
+                            </td>
+                            <td>{{ productSale.countProduct | number }}</td>
+                            <td>{{ productSale.singleValue | number }}</td>
+                            <td>{{ productSale.totalProduct | number }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <dt><span>día seleccionado para la entrega</span></dt>
                 <dd>
                     <span>{{sale.description}}</span>
                 </dd>
-                <dt><span>Management Date</span></dt>
+                <dt>
+                <dt><span>fecha en que se gestiona su pedido</span></dt>
                 <dd>
                     <span>{{sale.managementDate}}</span>
                 </dd>
+                <!--    
+                    <dt><span>Iva</span></dt>
+                    <dd>
+                        <span>{{sale.iva}}</span>
+                    </dd>
+                    <dt><span>Discount</span></dt>
+                    <dd>
+                        <span>{{sale.discount}}</span>
+                    </dd>
+                    <dt><span>User Client</span></dt>
+                    <dd>
+                        <div *ngIf="sale.userClient">
+                            <a [routerLink]="['/user-client', sale.userClient?.id, 'view']">{{sale.userClient?.id}}</a>
+                        </div>
+                    </dd>
+                -->
                 <dt><span>Total Cost</span></dt>
                 <dd>
                     <span>{{sale.totalCost}}</span>
                 </dd>
-                <dt><span>Iva</span></dt>
-                <dd>
-                    <span>{{sale.iva}}</span>
-                </dd>
-                <dt><span>Discount</span></dt>
-                <dd>
-                    <span>{{sale.discount}}</span>
-                </dd>
-                <dt><span>User Client</span></dt>
-                <dd>
-                    <div *ngIf="sale.userClient">
-                        <a [routerLink]="['/user-client', sale.userClient?.id, 'view']">{{sale.userClient?.id}}</a>
-                    </div>
-                </dd>
             </dl>
 
-            <button type="submit"
-                    (click)="previousState()"
-                    class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Volver</span>
             </button>
 
-            <button type="button"
-                    [routerLink]="['/sale', sale.id, 'edit']"
-                    class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
-            </button>
+            <!--         
+                <button type="button" [routerLink]="['/sale', sale.id, 'edit']" class="btn btn-primary">
+                    <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+                </button>
+            -->
         </div>
     </div>
 </div>

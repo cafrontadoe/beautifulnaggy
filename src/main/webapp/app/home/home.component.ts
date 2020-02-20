@@ -110,7 +110,7 @@ export class HomeComponent implements OnInit {
 
     dismissProduct(product: IProduct) {
         for (let i = 0; i < this.productSaleList.length; i++) {
-            if (product.codigo === this.productSaleList[i].product.codigo) {
+            if (product.codigo === this.productSaleList[i].products[0].codigo) {
                 this.productSaleList.splice(i, 1);
                 this.cartService.changeSaleCart(this.productSaleList);
             }
@@ -121,7 +121,7 @@ export class HomeComponent implements OnInit {
         this.productSaleList.push({
             countProduct: productLocal.requestCount,
             totalProduct: productLocal.requestCount * productLocal.priceBeauty,
-            product: productLocal
+            products: [productLocal]
         });
         this.cartService.changeSaleCart(this.productSaleList);
     }

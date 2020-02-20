@@ -40,6 +40,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = BeautifulNaggyApp.class)
 public class ProductSaleResourceIntTest {
 
+    private static final Integer DEFAULT_ID_PRODUCT = 1;
+    private static final Integer UPDATED_ID_PRODUCT = 2;
+
     private static final Integer DEFAULT_COUNT_PRODUCT = 1;
     private static final Integer UPDATED_COUNT_PRODUCT = 2;
 
@@ -88,6 +91,7 @@ public class ProductSaleResourceIntTest {
      */
     public static ProductSale createEntity(EntityManager em) {
         ProductSale productSale = new ProductSale()
+            .idProduct(DEFAULT_ID_PRODUCT)
             .countProduct(DEFAULT_COUNT_PRODUCT)
             .totalProduct(DEFAULT_TOTAL_PRODUCT);
         return productSale;
@@ -113,6 +117,7 @@ public class ProductSaleResourceIntTest {
         List<ProductSale> productSaleList = productSaleRepository.findAll();
         assertThat(productSaleList).hasSize(databaseSizeBeforeCreate + 1);
         ProductSale testProductSale = productSaleList.get(productSaleList.size() - 1);
+        assertThat(testProductSale.getIdProduct()).isEqualTo(DEFAULT_ID_PRODUCT);
         assertThat(testProductSale.getCountProduct()).isEqualTo(DEFAULT_COUNT_PRODUCT);
         assertThat(testProductSale.getTotalProduct()).isEqualTo(DEFAULT_TOTAL_PRODUCT);
     }
@@ -134,6 +139,24 @@ public class ProductSaleResourceIntTest {
         // Validate the ProductSale in the database
         List<ProductSale> productSaleList = productSaleRepository.findAll();
         assertThat(productSaleList).hasSize(databaseSizeBeforeCreate);
+    }
+
+    @Test
+    @Transactional
+    public void checkIdProductIsRequired() throws Exception {
+        int databaseSizeBeforeTest = productSaleRepository.findAll().size();
+        // set the field null
+        productSale.setIdProduct(null);
+
+        // Create the ProductSale, which fails.
+
+        restProductSaleMockMvc.perform(post("/api/product-sales")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(productSale)))
+            .andExpect(status().isBadRequest());
+
+        List<ProductSale> productSaleList = productSaleRepository.findAll();
+        assertThat(productSaleList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -183,6 +206,7 @@ public class ProductSaleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(productSale.getId().intValue())))
+            .andExpect(jsonPath("$.[*].idProduct").value(hasItem(DEFAULT_ID_PRODUCT)))
             .andExpect(jsonPath("$.[*].countProduct").value(hasItem(DEFAULT_COUNT_PRODUCT)))
             .andExpect(jsonPath("$.[*].totalProduct").value(hasItem(DEFAULT_TOTAL_PRODUCT.doubleValue())));
     }
@@ -198,6 +222,7 @@ public class ProductSaleResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(productSale.getId().intValue()))
+            .andExpect(jsonPath("$.idProduct").value(DEFAULT_ID_PRODUCT))
             .andExpect(jsonPath("$.countProduct").value(DEFAULT_COUNT_PRODUCT))
             .andExpect(jsonPath("$.totalProduct").value(DEFAULT_TOTAL_PRODUCT.doubleValue()));
     }
@@ -223,6 +248,7 @@ public class ProductSaleResourceIntTest {
         // Disconnect from session so that the updates on updatedProductSale are not directly saved in db
         em.detach(updatedProductSale);
         updatedProductSale
+            .idProduct(UPDATED_ID_PRODUCT)
             .countProduct(UPDATED_COUNT_PRODUCT)
             .totalProduct(UPDATED_TOTAL_PRODUCT);
 
@@ -235,6 +261,7 @@ public class ProductSaleResourceIntTest {
         List<ProductSale> productSaleList = productSaleRepository.findAll();
         assertThat(productSaleList).hasSize(databaseSizeBeforeUpdate);
         ProductSale testProductSale = productSaleList.get(productSaleList.size() - 1);
+        assertThat(testProductSale.getIdProduct()).isEqualTo(UPDATED_ID_PRODUCT);
         assertThat(testProductSale.getCountProduct()).isEqualTo(UPDATED_COUNT_PRODUCT);
         assertThat(testProductSale.getTotalProduct()).isEqualTo(UPDATED_TOTAL_PRODUCT);
     }

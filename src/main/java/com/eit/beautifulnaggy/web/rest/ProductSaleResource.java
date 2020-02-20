@@ -1,4 +1,5 @@
 package com.eit.beautifulnaggy.web.rest;
+
 import com.eit.beautifulnaggy.domain.ProductSale;
 import com.eit.beautifulnaggy.repository.ProductSaleRepository;
 import com.eit.beautifulnaggy.web.rest.errors.BadRequestAlertException;
@@ -6,6 +7,7 @@ import com.eit.beautifulnaggy.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +17,6 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * REST controller for managing ProductSale.
@@ -78,20 +78,20 @@ public class ProductSaleResource {
     /**
      * GET  /product-sales : get all the productSales.
      *
-     * @param filter the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of productSales in body
      */
     @GetMapping("/product-sales")
-    public List<ProductSale> getAllProductSales(@RequestParam(required = false) String filter) {
-        if ("product-is-null".equals(filter)) {
-            log.debug("REST request to get all ProductSales where product is null");
-            return StreamSupport
-                .stream(productSaleRepository.findAll().spliterator(), false)
-                .filter(productSale -> productSale.getProduct() == null)
-                .collect(Collectors.toList());
-        }
+    public List<ProductSale> getAllProductSales() {
         log.debug("REST request to get all ProductSales");
         return productSaleRepository.findAll();
+    }
+
+
+
+    @GetMapping("/product-sales/by-sale/{idSale}")
+    public List<ProductSale> getProductSaleListBySale(@PathVariable Long idSale) {
+        log.debug("REST request to  getProductSaleListBySale");
+        return productSaleRepository.getProductSaleBySale(idSale);
     }
 
     /**

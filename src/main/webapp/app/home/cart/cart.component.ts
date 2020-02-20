@@ -118,7 +118,7 @@ export class CartComponent implements OnInit, OnChanges {
         this.productSaleList.forEach(element => {
             this.numProducts = this.numProducts + element.countProduct;
 
-            this.totalCost = (this.totalCost + element.product.priceBeauty) * element.countProduct;
+            this.totalCost = (this.totalCost + element.products[0].priceBeauty) * element.countProduct;
         });
         console.log(this.numProducts);
     }
@@ -148,10 +148,6 @@ export class CartComponent implements OnInit, OnChanges {
         this.sale.productSales = this.productSaleList;
         this.sale.total = this.totalCost;
         this.sale.totalCost = this.sale.total;
-        console.log('this.sale');
-        console.log(this.sale);
-
-        //    this.sale.userClient
         this.callServiceSaveSale();
     }
 

@@ -17,7 +17,7 @@
 
           <div class="col-3-sm description">
             <p style="display: inline-block; font-size: 1.rem !important;">
-              {{item.product.nombre.substr(0, 31)}}{{item.product.nombre.length > 31 ? '...'  : '  '}}    </p>
+              {{item.products[0].nombre.substr(0, 31)}}{{item.products[0].nombre.length > 31 ? '...'  : '  '}}    </p>
           </div>
 
 
@@ -26,7 +26,7 @@
           </div>
           <div class="col-6-sm price">
             <p style="display: inline-block; font-size: 1.rem !important;">
-                    =  {{item.countProduct * item.product.priceBeauty | currency:'USD':'symbol':'1.0-0' }}</p>
+                    =  {{item.countProduct * item.products[0].priceBeauty | currency:'USD':'symbol':'1.0-0' }}</p>
           </div>
         </div>
       </div>

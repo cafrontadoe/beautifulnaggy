@@ -21,7 +21,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let sale of sales ;trackBy: trackId">
+      <tr *ngFor="let sale of sales">
           <td><a [routerLink]="['/sale', sale.id, 'view' ]">{{sale.id}}</a></td>
           <td>{{sale.creationDate | date:'medium'}}</td>
           <td>{{sale.description}}</td>

@@ -35,4 +35,8 @@ export class ProductSaleService {
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
+
+    getProductSaleListByProduct(idSale: number): Observable<HttpResponse<any>> {
+        return this.http.get<IProductSale[]>(`${this.resourceUrl}/by-sale/${idSale}`, { observe: 'response' });
+    }
 }

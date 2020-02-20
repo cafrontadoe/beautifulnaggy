@@ -46,17 +46,16 @@
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-one",
-            "relationshipName": "productSale",
-            "otherEntityName": "productSale",
+            "relationshipType": "many-to-one",
+            "relationshipName": "productCaroucel",
+            "otherEntityName": "productCarousel",
             "otherEntityField": "id",
-            "ownerSide": true,
             "otherEntityRelationshipName": "product"
         },
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "productCaroucel",
-            "otherEntityName": "productCarousel",
+            "relationshipName": "productSale",
+            "otherEntityName": "productSale",
             "otherEntityField": "id",
             "otherEntityRelationshipName": "product"
         }

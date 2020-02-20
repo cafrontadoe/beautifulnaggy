@@ -75,6 +75,34 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'sale',
                 loadChildren: './sale/sale.module#BeautifulNaggySaleModule'
+            },
+            {
+                path: 'product',
+                loadChildren: './product/product.module#BeautifulNaggyProductModule'
+            },
+            {
+                path: 'product-sale',
+                loadChildren: './product-sale/product-sale.module#BeautifulNaggyProductSaleModule'
+            },
+            {
+                path: 'product',
+                loadChildren: './product/product.module#BeautifulNaggyProductModule'
+            },
+            {
+                path: 'product-sale',
+                loadChildren: './product-sale/product-sale.module#BeautifulNaggyProductSaleModule'
+            },
+            {
+                path: 'product',
+                loadChildren: './product/product.module#BeautifulNaggyProductModule'
+            },
+            {
+                path: 'product-sale',
+                loadChildren: './product-sale/product-sale.module#BeautifulNaggyProductSaleModule'
+            },
+            {
+                path: 'product-sale',
+                loadChildren: './product-sale/product-sale.module#BeautifulNaggyProductSaleModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

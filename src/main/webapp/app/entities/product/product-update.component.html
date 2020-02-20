@@ -82,17 +82,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_productSale">Product Sale</label>
-                    <select class="form-control" id="field_productSale" name="productSale" [(ngModel)]="product.productSale">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="productSaleOption.id === product.productSale?.id ? product.productSale : productSaleOption" *ngFor="let productSaleOption of productsales; trackBy: trackProductSaleById">{{productSaleOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" for="field_productCaroucel">Product Caroucel</label>
                     <select class="form-control" id="field_productCaroucel" name="productCaroucel" [(ngModel)]="product.productCaroucel" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="productCarouselOption.id === product.productCaroucel?.id ? product.productCaroucel : productCarouselOption" *ngFor="let productCarouselOption of productcarousels; trackBy: trackProductCarouselById">{{productCarouselOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_productSale">Product Sale</label>
+                    <select class="form-control" id="field_productSale" name="productSale" [(ngModel)]="product.productSale" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="productSaleOption.id === product.productSale?.id ? product.productSale : productSaleOption" *ngFor="let productSaleOption of productsales; trackBy: trackProductSaleById">{{productSaleOption.id}}</option>
                     </select>
                 </div>
             </div>

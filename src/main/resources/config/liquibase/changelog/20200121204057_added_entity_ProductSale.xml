@@ -22,6 +22,10 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="id_product" type="integer">
+                <constraints nullable="false" />
+            </column>
+
             <column name="count_product" type="integer">
                 <constraints nullable="false" />
             </column>

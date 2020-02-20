@@ -19,6 +19,7 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -53,13 +54,13 @@ public class Product implements Serializable {
     @Column(name = "packaging")
     private String packaging;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private ProductSale productSale;
-
     @ManyToOne
     @JsonIgnoreProperties("products")
     private ProductCarousel productCaroucel;
+
+    @ManyToOne
+    @JsonIgnoreProperties("products")
+    private ProductSale productSale;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -187,19 +188,6 @@ public class Product implements Serializable {
         this.packaging = packaging;
     }
 
-    public ProductSale getProductSale() {
-        return productSale;
-    }
-
-    public Product productSale(ProductSale productSale) {
-        this.productSale = productSale;
-        return this;
-    }
-
-    public void setProductSale(ProductSale productSale) {
-        this.productSale = productSale;
-    }
-
     public ProductCarousel getProductCaroucel() {
         return productCaroucel;
     }
@@ -211,6 +199,19 @@ public class Product implements Serializable {
 
     public void setProductCaroucel(ProductCarousel productCarousel) {
         this.productCaroucel = productCarousel;
+    }
+
+    public ProductSale getProductSale() {
+        return productSale;
+    }
+
+    public Product productSale(ProductSale productSale) {
+        this.productSale = productSale;
+        return this;
+    }
+
+    public void setProductSale(ProductSale productSale) {
+        this.productSale = productSale;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

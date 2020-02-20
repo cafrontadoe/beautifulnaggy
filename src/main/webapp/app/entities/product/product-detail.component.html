@@ -40,16 +40,16 @@
                 <dd>
                     <span>{{product.packaging}}</span>
                 </dd>
-                <dt><span>Product Sale</span></dt>
-                <dd>
-                    <div *ngIf="product.productSale">
-                        <a [routerLink]="['/product-sale', product.productSale?.id, 'view']">{{product.productSale?.id}}</a>
-                    </div>
-                </dd>
                 <dt><span>Product Caroucel</span></dt>
                 <dd>
                     <div *ngIf="product.productCaroucel">
                         <a [routerLink]="['/product-carousel', product.productCaroucel?.id, 'view']">{{product.productCaroucel?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Product Sale</span></dt>
+                <dd>
+                    <div *ngIf="product.productSale">
+                        <a [routerLink]="['/product-sale', product.productSale?.id, 'view']">{{product.productSale?.id}}</a>
                     </div>
                 </dd>
             </dl>

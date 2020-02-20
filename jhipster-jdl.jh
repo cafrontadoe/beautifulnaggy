@@ -37,12 +37,13 @@ entity Sale {
 }
 
 entity ProductSale {
+	idProduct Integer required,
     countProduct Integer required, 
     totalProduct Double required
 }
 
-relationship OneToOne{
-Product{productSale} to ProductSale{product}
+relationship OneToMany{
+ProductSale{product} to Product{productSale}
 }
 
 relationship ManyToOne {
