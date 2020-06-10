@@ -12,8 +12,10 @@ import { AccountService } from 'app/core/auth/account.service';
 import { UserClientService } from 'app/entities/user-client/user-client.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoginModalService } from 'app/core/login/login-modal.service';
-import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductSaleService } from 'app/entities/product-sale';
+import { Router } from '@angular/router';
+import { SelectDayModalComponent } from '../select-day-modal/select-day.component';
 
 const OFFSET_HEIGHT = 170;
 const PRODUCT_HEIGHT = 48;
@@ -52,7 +54,8 @@ export class CartComponent implements OnInit, OnChanges {
         private readonly accountService: AccountService,
         private readonly userClientService: UserClientService,
         private readonly loginModalService: LoginModalService,
-        private readonly productSaleService: ProductSaleService
+        private modalService: NgbModal,
+        private readonly router: Router
     ) {}
 
     ngOnInit() {
@@ -115,10 +118,11 @@ export class CartComponent implements OnInit, OnChanges {
 
     onEventSale() {
         this.numProducts = 0;
+        this.totalCost = 0;
         this.productSaleList.forEach(element => {
             this.numProducts = this.numProducts + element.countProduct;
 
-            this.totalCost = (this.totalCost + element.products[0].priceBeauty) * element.countProduct;
+            this.totalCost = this.totalCost + element.products[0].priceBeauty * element.countProduct;
         });
         console.log(this.numProducts);
     }
@@ -128,6 +132,7 @@ export class CartComponent implements OnInit, OnChanges {
     }
 
     sendRequest(event: any) {
+        /*
         this.messageService.openDayConfirm('que día deseas recibir tu pedido?').then((value: SweetAlertResult) => {
             console.log(value);
             if (value.value) {
@@ -138,6 +143,8 @@ export class CartComponent implements OnInit, OnChanges {
                 this.setSaleObj();
             }
         });
+        */
+        this.openModal();
     }
 
     setSaleObj() {
@@ -156,15 +163,27 @@ export class CartComponent implements OnInit, OnChanges {
             (res: any) => {
                 console.log(res);
 
-                this.messageService.openSucessConfirm({
-                    title: 'El Pedido fue registrado exitosamente.',
-                    text: 'podras ver los detalles de tus pedido en la opción de menú "Mis pedidos" ',
-                    confirmButtonText: 'Aceptar'
-                });
+                this.messageService
+                    .openSucessConfirm({
+                        title: 'El Pedido fue registrado exitosamente.',
+                        text: 'podras ver los detalles de tus pedido en la opción de menú "Mis pedidos" ',
+                        confirmButtonText: 'Aceptar'
+                    })
+                    .then((value: SweetAlertResult) => {
+                        if (value.value) {
+                            this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+                                this.router.navigate(['']);
+                            });
+                        }
+                    });
             },
             (error: HttpErrorResponse) => {
                 console.log(error);
             }
         );
+    }
+
+    openModal() {
+        const modalRef = this.modalService.open(SelectDayModalComponent);
     }
 }

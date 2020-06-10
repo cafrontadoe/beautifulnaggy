@@ -1,46 +1,10 @@
-import $ from 'jquery';
 import { NgForm } from '@angular/forms';
 import { NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ElementRef } from '@angular/core';
-import { IFilter } from './model/filter';
-import { LoginRequest } from '@shared/model/login-request.model';
-import * as CryptoJS from 'crypto-js';
 
 export class Util {
     static readonly decryptHash = ")M&'2Jr%?7'Xuspk";
     static cookieName = '_xm_sess';
-
-    /**
-     * Encripta las credenciales ingresadas
-     * @param cred objeto de loginRequest
-     */
-    static encryptCredentials(cred: LoginRequest): string {
-        let hash = '';
-        try {
-            hash = CryptoJS.AES.encrypt(JSON.stringify(cred), this.decryptHash).toString();
-        } catch (e) {
-            console.error(e);
-        }
-        return hash;
-    }
-
-    /**
-     * Desencripta las credenciales pasadas por parametro
-     * @param creds string de credenciales en formato json
-     */
-    static decryptCredentials(creds: string): any {
-        let obj = {};
-        try {
-            if (!creds) {
-                return {};
-            }
-
-            obj = JSON.parse(CryptoJS.AES.decrypt(creds, this.decryptHash).toString(CryptoJS.enc.Utf8));
-        } catch (e) {
-            console.error(e);
-        }
-        return obj;
-    }
 
     static getMonthName(date: string) {
         const monthNames = [
@@ -129,14 +93,6 @@ export class Util {
         return bytes.buffer;
     }
 
-    /**
-     * Valida si un objeto por lo menos tiene una propiedad con valor
-     * @param obj objeto a validar
-     */
-    static objectHasValue(obj: object) {
-        return Object.values(obj).find((value: any) => value != '' && value !== null && value !== undefined);
-    }
-
     static getActualDay() {
         const date = new Date();
         return {
@@ -155,10 +111,6 @@ export class Util {
             day: date.getDate(),
             month: date.getMonth() + 1
         };
-    }
-
-    static scrollTop(id: string) {
-        window.scrollTo(0, $(`#${id}`).offset().top - 90);
     }
 
     static resetForm(form: NgForm) {
@@ -212,53 +164,6 @@ export class Util {
         }
     }
 
-    /**
-     *  Create Query to metadata search by (API)
-     */
-    static filterAccion(filter: IFilter): string {
-        let filterQuery = '';
-
-        if (filter.limit) {
-            filterQuery = '?limit=' + filter.limit;
-        }
-
-        if (filter.numberPage) {
-            if (filterQuery == null || filterQuery === '') {
-                filterQuery = '?numberPage=' + filter.numberPage;
-            } else {
-                filterQuery = filterQuery + '&numberPage=' + filter.numberPage;
-            }
-        }
-
-        if (filter.keyParameter != null && filter.keyParameter !== '') {
-            if (filterQuery == null || filterQuery === '') {
-                filterQuery = '?keyParameter=' + filter.keyParameter;
-            } else {
-                filterQuery = filterQuery + '&keyParameter=' + filter.keyParameter;
-            }
-        }
-
-        if (filter.projectId && filter.projectId !== '') {
-            if (filterQuery == null || filterQuery === '') {
-                filterQuery = '?projectId=' + filter.projectId;
-            } else {
-                filterQuery = filterQuery + '&projectId=' + filter.projectId;
-            }
-        }
-
-        if (filter.sort && filter.sort.direction !== '') {
-            if (filterQuery == null || filterQuery === '') {
-                filterQuery = '?sort=' + filter.sort.active + '%2B' + filter.sort.direction.toLocaleUpperCase();
-            } else {
-                filterQuery = filterQuery + '&sort=' + filter.sort.active + '%2B' + filter.sort.direction.toLocaleUpperCase();
-            }
-        } else {
-            filterQuery = filterQuery + '';
-        }
-
-        return filterQuery;
-    }
-
     static deleteElement(arrayList: any[], index: number): any[] {
         arrayList.splice(index, 1);
         return arrayList;
@@ -285,15 +190,6 @@ export class Util {
         if ((e.keyCode < 48 || e.keyCode > 57) && (e.keyCode < 96 || e.keyCode > 105)) {
             e.preventDefault();
         }
-    }
-
-    static filterAccionPlus(filter: IFilter, obj: any) {
-        let url = '';
-        // tslint:disable-next-line: forin
-        for (const prop in obj) {
-            url = `${url}&${prop}=${obj[prop]}`;
-        }
-        return `${this.filterAccion(filter)}${url}`;
     }
 
     static url(baseUrl: string, relativeUrl: string, filterQuery?: { [name: string]: any }): string {
